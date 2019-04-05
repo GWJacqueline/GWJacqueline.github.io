@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。 ios fixed定位+长表单   主要代码：12345678&amp;lt;body&amp;gt;  &amp;lt;header&amp;gt;      &amp;lt;!-- fixed定位的头部 --&amp;gt;  &amp;lt;header&amp;gt;  &amp;lt;section&amp;g">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta name="keywords" content="移动端,兼容性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端常见兼容性问题">
 <meta property="og:url" content="https://gwjacqueline.github.io/移动端常见兼容性问题/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。 ios fixed定位+长表单   主要代码：12345678&amp;lt;body&amp;gt;  &amp;lt;header&amp;gt;      &amp;lt;!-- fixed定位的头部 --&amp;gt;  &amp;lt;header&amp;gt;  &amp;lt;section&amp;g">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/androidFixed.png">
@@ -29,10 +29,10 @@
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn1.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn2.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iospsw.jpeg">
-<meta property="og:updated_time" content="2019-04-05T12:14:15.000Z">
+<meta property="og:updated_time" content="2019-04-05T12:19:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端常见兼容性问题">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。 ios fixed定位+长表单   主要代码：12345678&amp;lt;body&amp;gt;  &amp;lt;header&amp;gt;      &amp;lt;!-- fixed定位的头部 --&amp;gt;  &amp;lt;header&amp;gt;  &amp;lt;section&amp;g">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta name="twitter:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
@@ -191,7 +191,7 @@
     <div class="article-meta">
       
 	<a href="/移动端常见兼容性问题/" class="article-date">
-	  <time datetime="2019-04-05T12:14:15.000Z" itemprop="datePublished">2019-04-05</time>
+	  <time datetime="2019-04-05T12:19:16.000Z" itemprop="datePublished">2019-04-05</time>
 	</a>
 
       
@@ -209,7 +209,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。<br><a id="more"></a></p>
 <h3 id="ios-fixed定位-长表单"><a href="#ios-fixed定位-长表单" class="headerlink" title="ios fixed定位+长表单"></a>ios fixed定位+长表单</h3><p><div align="center"><br>  <img width="200" src="../images/fixedBug.png" alt="ios fixed bug实例" title="ios fixed定位+长表单"><br></div></p>
 <h4 id="主要代码："><a href="#主要代码：" class="headerlink" title="主要代码："></a>主要代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">      &lt;!-- fixed定位的头部 --&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">      &lt;!-- 自然布局 --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="bug描述："><a href="#bug描述：" class="headerlink" title="bug描述："></a>bug描述：</h4><p>只有在ios上出现：当section过长(有滚动条时)，表单获取焦点时。上图红色框的头部会掉落至绿色部分。</p>
