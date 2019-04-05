@@ -147,6 +147,9 @@ html{
 	letter-spacing: 9px;
 	text-transform: uppercase;
 }
+.homelogoback>h3 {
+    margin-bottom: 0;
+}
     
 .thumb{
 	display: block;
@@ -237,6 +240,7 @@ footer>.container>.row>p>a:hover  {
 	}
 	.homelogoback>h3 {
 		font-size: 16px;
+        margin-bottom: 0 !important;
 	}
 	h1{
 		font-size: 1.5em;
