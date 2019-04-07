@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法把">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
 <meta name="keywords" content="ES6,数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="天花乱坠的数组方法(二)">
 <meta property="og:url" content="https://gwjacqueline.github.io/天花乱坠的数组方法(二)/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法把">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-07T12:21:08.000Z">
+<meta property="og:updated_time" content="2019-04-07T12:23:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天花乱坠的数组方法(二)">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法把">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
   
@@ -180,7 +180,7 @@
     <div class="article-meta">
       
 	<a href="/天花乱坠的数组方法(二)/" class="article-date">
-	  <time datetime="2019-04-07T12:21:08.000Z" itemprop="datePublished">2019-04-07</time>
+	  <time datetime="2019-04-07T12:23:36.000Z" itemprop="datePublished">2019-04-07</time>
 	</a>
 
       
@@ -199,7 +199,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法把<br><a id="more"></a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧<br><a id="more"></a></p>
 </blockquote>
 <h2 id="原数组不会被修改"><a href="#原数组不会被修改" class="headerlink" title="原数组不会被修改"></a>原数组不会被修改</h2><h3 id="数组转换为字符串：join"><a href="#数组转换为字符串：join" class="headerlink" title="数组转换为字符串：join()"></a>数组转换为字符串：join()</h3><p>二话不说，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arrJoin= [1,2,3,4,5];</span><br><span class="line">console.log(arrJoin.join(&quot;&quot;));   //12345</span><br><span class="line">console.log(arrJoin.join(&quot;❤️&quot;)); //1❤️2❤️3❤️4❤️5</span><br><span class="line">// 事实证明：原数组不会被修改</span><br><span class="line">console.log(arrJoin); //[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure></p>
 <p>来个实用的场景吧：将某个字符重复n次<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function repeat(str,n)&#123;</span><br><span class="line">    return new Array(n+1).join(str);</span><br><span class="line">&#125;</span><br><span class="line">console.log(repeat(&quot;哈&quot;,3)); //哈哈哈</span><br><span class="line">console.log(repeat(&quot;hi&quot;,5));//hihihihihi</span><br></pre></td></tr></table></figure></p>
