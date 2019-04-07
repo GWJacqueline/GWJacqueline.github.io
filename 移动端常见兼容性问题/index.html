@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta name="keywords" content="移动端,兼容性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端常见兼容性问题">
 <meta property="og:url" content="https://gwjacqueline.github.io/移动端常见兼容性问题/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/androidFixed.png">
@@ -29,10 +29,10 @@
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn1.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn2.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iospsw.jpeg">
-<meta property="og:updated_time" content="2019-04-05T13:11:30.000Z">
+<meta property="og:updated_time" content="2019-04-06T10:49:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端常见兼容性问题">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
 <meta name="twitter:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
@@ -191,7 +191,7 @@
     <div class="article-meta">
       
 	<a href="/移动端常见兼容性问题/" class="article-date">
-	  <time datetime="2019-04-05T13:11:30.000Z" itemprop="datePublished">2019-04-05</time>
+	  <time datetime="2019-04-06T10:49:03.000Z" itemprop="datePublished">2019-04-06</time>
 	</a>
 
       
@@ -209,12 +209,14 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。<br><a id="more"></a></p>
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。<br><a id="more"></a></p>
+</blockquote>
 <h3 id="ios-fixed定位-长表单"><a href="#ios-fixed定位-长表单" class="headerlink" title="ios fixed定位+长表单"></a>ios fixed定位+长表单</h3><p><div align="center"><br>  <img width="200" src="../images/fixedBug.png" alt="ios fixed bug实例" title="ios fixed定位+长表单"><br></div></p>
 <h4 id="主要代码："><a href="#主要代码：" class="headerlink" title="主要代码："></a>主要代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">      &lt;!-- fixed定位的头部 --&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">      &lt;!-- 自然布局 --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="bug描述："><a href="#bug描述：" class="headerlink" title="bug描述："></a>bug描述：</h4><p>只有在ios上出现：当section过长(有滚动条时)，表单获取焦点时。上图红色框的头部会掉落至绿色部分。</p>
 <h4 id="bug解决："><a href="#bug解决：" class="headerlink" title="bug解决："></a>bug解决：</h4><p>造成问题的原因：当表单获取焦点，键盘弹出时，可视高度变小。<br>解决方式：表单获取焦点时，把fixed定位改成absolute;失去焦点时，改回来。<br>个人建议：在实际开发中，避免让头部使用fixed定位。页面整体建议采用flex布局，减少页面高度计算。</p>
-<h3 id="Android-footer-绝对定位"><a href="#Android-footer-绝对定位" class="headerlink" title="Android footer 绝对定位"></a>Android footer 绝对定位</h3><p><div align="center"><br>  <img width="200" src="../images/androidFixed.png" alt="android fixed bug实例" title="Android footer绝对定位'"><br></div></p>
+<h3 id="Android-footer-绝对定位"><a href="#Android-footer-绝对定位" class="headerlink" title="Android footer 绝对定位"></a>Android footer 绝对定位</h3><p><div align="center"><br>  <img width="200" src="../images/androidFixed.png" alt="android fixed bug实例" title="Android footer绝对定位"><br></div></p>
 <h4 id="主要代码：-1"><a href="#主要代码：-1" class="headerlink" title="主要代码："></a>主要代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">      &lt;!-- absolute定位的头部 --&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">      &lt;!-- 自然布局 --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">      &lt;!-- fixed定位的footer --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="bug描述：-1"><a href="#bug描述：-1" class="headerlink" title="bug描述："></a>bug描述：</h4><p>只有在Android手机上出现：表单获取焦点时,系统键盘会将fixed定位的footer顶起来。</p>
 <h4 id="bug解决：-1"><a href="#bug解决：-1" class="headerlink" title="bug解决："></a>bug解决：</h4><p>造成问题的原因：系统键盘会顶走fixed布局元素。<br>解决方式：<br>1.表单获取焦点时，把fixed定位的元素改成static；失焦后，再改回来。<br>2.表单获取焦点时，把fixed定位的元素设置为display:none；失焦后，再设置成为display:block。</p>
@@ -327,6 +329,20 @@ var a = new Donate({
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/天花乱坠的数组方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          天花乱坠的数组方法(一)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
