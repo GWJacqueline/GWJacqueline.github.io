@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://gwjacqueline.github.io/images/everyFlow.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/someFlow.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/reduceFlow.png">
-<meta property="og:updated_time" content="2019-04-07T11:07:33.000Z">
+<meta property="og:updated_time" content="2019-04-07T11:10:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天花乱坠的数组方法(一)">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方">
@@ -188,7 +188,7 @@
     <div class="article-meta">
       
 	<a href="/天花乱坠的数组方法/" class="article-date">
-	  <time datetime="2019-04-07T11:07:33.000Z" itemprop="datePublished">2019-04-07</time>
+	  <time datetime="2019-04-07T11:10:16.000Z" itemprop="datePublished">2019-04-07</time>
 	</a>
 
       
@@ -207,7 +207,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方法。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方法。<br><a id="more"></a></p>
 </blockquote>
 <h2 id="ES6中新增的数组方法"><a href="#ES6中新增的数组方法" class="headerlink" title="ES6中新增的数组方法"></a>ES6中新增的数组方法</h2><h3 id="数组元素遍历：for循环-forEach"><a href="#数组元素遍历：for循环-forEach" class="headerlink" title="数组元素遍历：for循环/forEach()"></a>数组元素遍历：for循环/forEach()</h3><p>在ES6之前还没有forEach()方法时，我们通常是使用for循环对数组进行遍历的。</p>
 <h4 id="ES5之前：for循环遍历数组实例："><a href="#ES5之前：for循环遍历数组实例：" class="headerlink" title="ES5之前：for循环遍历数组实例："></a>ES5之前：for循环遍历数组实例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//通过for循环将数组中的元素遍历出来</span><br><span class="line">var color = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;];</span><br><span class="line">for(var i=0;i&lt;color.length;i++)&#123;</span><br><span class="line">  console.log(color[i]);   //blue,yellow,red</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
