@@ -11,18 +11,18 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了 ES6 当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下 ES5 中常见的数组方法吧">
 <meta name="keywords" content="ES6,数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="天花乱坠的数组方法(二)">
 <meta property="og:url" content="https://gwjacqueline.github.io/天花乱坠的数组方法(二)/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了 ES6 当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下 ES5 中常见的数组方法吧">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-08T08:15:00.000Z">
+<meta property="og:updated_time" content="2019-04-12T12:18:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天花乱坠的数组方法(二)">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章中很详细的说了 ES6 当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下 ES5 中常见的数组方法吧">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
   
@@ -180,7 +180,7 @@
     <div class="article-meta">
       
 	<a href="/天花乱坠的数组方法(二)/" class="article-date">
-	  <time datetime="2019-04-08T08:15:00.000Z" itemprop="datePublished">2019-04-08</time>
+	  <time datetime="2019-04-07T11:35:39.000Z" itemprop="datePublished">2019-04-07</time>
 	</a>
 
       
@@ -199,19 +199,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇文章中很详细的说了ES6当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下ES5中常见的数组方法吧<br><a id="more"></a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇文章中很详细的说了 ES6 当中常用的数组方法，本篇文章快刀斩乱马的根据”原数组是否会被修改”的分类说下 ES5 中常见的数组方法吧</p>
 </blockquote>
-<h2 id="原数组不会被修改"><a href="#原数组不会被修改" class="headerlink" title="原数组不会被修改"></a>原数组不会被修改</h2><h3 id="数组转换为字符串：join"><a href="#数组转换为字符串：join" class="headerlink" title="数组转换为字符串：join()"></a>数组转换为字符串：join()</h3><p>二话不说，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arrJoin= [1,2,3,4,5];</span><br><span class="line">console.log(arrJoin.join(&quot;&quot;));   //12345</span><br><span class="line">console.log(arrJoin.join(&quot;❤️&quot;)); //1❤️2❤️3❤️4❤️5</span><br><span class="line">// 事实证明：原数组不会被修改</span><br><span class="line">console.log(arrJoin); //[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure></p>
-<p>来个实用的场景吧：将某个字符重复n次<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function repeat(str,n)&#123;</span><br><span class="line">    return new Array(n+1).join(str);</span><br><span class="line">&#125;</span><br><span class="line">console.log(repeat(&quot;哈&quot;,3)); //哈哈哈</span><br><span class="line">console.log(repeat(&quot;hi&quot;,5));//hihihihihi</span><br></pre></td></tr></table></figure></p>
-<h3 id="数组的合并：concat"><a href="#数组的合并：concat" class="headerlink" title="数组的合并：concat()"></a>数组的合并：concat()</h3><p>看看怎么用？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var arrConcat = [1,2,3];</span><br><span class="line">console.log(arrConcat.concat(4,5)); //[1, 2, 3, 4, 5]</span><br><span class="line">// 会被拉平为一维数组</span><br><span class="line">console.log(arrConcat.concat(4,5,[6,7])); //[1, 2, 3, 4, 5, 6, 7]</span><br><span class="line">//数组中还有数组时，不会被拉平</span><br><span class="line">console.log(arrConcat.concat(4,[5,[6,7]])); //[1, 2, 3, 4, 5,[6,7]]</span><br><span class="line">//concat()不会改变原数组</span><br><span class="line">console.log(arrConcat); //[1, 2, 3]</span><br></pre></td></tr></table></figure></p>
-<h3 id="返回部分数组：slice"><a href="#返回部分数组：slice" class="headerlink" title="返回部分数组：slice()"></a>返回部分数组：slice()</h3><p>任性上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arrSlice = [1,2,3,4,5];</span><br><span class="line">console.log(arrSlice.slice(1)); //[2,3,4,5]</span><br><span class="line">console.log(arrSlice.slice(0,2)); //[1,2]</span><br><span class="line">console.log(arrSlice.slice(1,4)); //[2,3,4]</span><br><span class="line">console.log(arrSlice.slice(1,-1)); //[2,3,4]</span><br><span class="line">console.log(arrSlice.slice(2,-1)); //[3,4]</span><br><span class="line">console.log(arrSlice); //[1,2,3,4,5]</span><br></pre></td></tr></table></figure></p>
-<p>看完代码后，我们可以总结下slice()的用法:<br>slice(start,end)<br>start:必须参数，指从何处开始截取，包含该处<br>end:可选参数，指从何处结束截取，不包含该处，该参数为负数时，指从数组尾部开始算起的位置</p>
+<a id="more"></a>
+<h2 id="原数组不会被修改"><a href="#原数组不会被修改" class="headerlink" title="原数组不会被修改"></a>原数组不会被修改</h2><h3 id="数组转换为字符串：join"><a href="#数组转换为字符串：join" class="headerlink" title="数组转换为字符串：join()"></a>数组转换为字符串：join()</h3><p>二话不说，上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arrJoin= [1,2,3,4,5];</span><br><span class="line">console.log(arrJoin.join(&quot;&quot;));   //12345</span><br><span class="line">console.log(arrJoin.join(&quot;❤️&quot;)); //1❤️2❤️3❤️4❤️5</span><br><span class="line">// 事实证明：原数组不会被修改</span><br><span class="line">console.log(arrJoin); //[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>来个实用的场景吧：将某个字符重复 n 次</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function repeat(str,n)&#123;</span><br><span class="line">    return new Array(n+1).join(str);</span><br><span class="line">&#125;</span><br><span class="line">console.log(repeat(&quot;哈&quot;,3)); //哈哈哈</span><br><span class="line">console.log(repeat(&quot;hi&quot;,5));//hihihihihi</span><br></pre></td></tr></table></figure>
+<h3 id="数组的合并：concat"><a href="#数组的合并：concat" class="headerlink" title="数组的合并：concat()"></a>数组的合并：concat()</h3><p>看看怎么用？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var arrConcat = [1,2,3];</span><br><span class="line">console.log(arrConcat.concat(4,5)); //[1, 2, 3, 4, 5]</span><br><span class="line">// 会被拉平为一维数组</span><br><span class="line">console.log(arrConcat.concat(4,5,[6,7])); //[1, 2, 3, 4, 5, 6, 7]</span><br><span class="line">//数组中还有数组时，不会被拉平</span><br><span class="line">console.log(arrConcat.concat(4,[5,[6,7]])); //[1, 2, 3, 4, 5,[6,7]]</span><br><span class="line">//concat()不会改变原数组</span><br><span class="line">console.log(arrConcat); //[1, 2, 3]</span><br></pre></td></tr></table></figure>
+<h3 id="返回部分数组：slice"><a href="#返回部分数组：slice" class="headerlink" title="返回部分数组：slice()"></a>返回部分数组：slice()</h3><p>任性上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arrSlice = [1,2,3,4,5];</span><br><span class="line">console.log(arrSlice.slice(1)); //[2,3,4,5]</span><br><span class="line">console.log(arrSlice.slice(0,2)); //[1,2]</span><br><span class="line">console.log(arrSlice.slice(1,4)); //[2,3,4]</span><br><span class="line">console.log(arrSlice.slice(1,-1)); //[2,3,4]</span><br><span class="line">console.log(arrSlice.slice(2,-1)); //[3,4]</span><br><span class="line">console.log(arrSlice); //[1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+<p>看完代码后，我们可以总结下 slice()的用法:<br>slice(start,end)<br>start:必须参数，指从何处开始截取，包含该处<br>end:可选参数，指从何处结束截取，不包含该处，该参数为负数时，指从数组尾部开始算起的位置</p>
 <h2 id="原数组会被修改"><a href="#原数组会被修改" class="headerlink" title="原数组会被修改"></a>原数组会被修改</h2><h3 id="数组逆序：reverse"><a href="#数组逆序：reverse" class="headerlink" title="数组逆序：reverse()"></a>数组逆序：reverse()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arrReverse = [1,2,3,4,5];</span><br><span class="line">console.log(arrReverse.reverse()); //[5, 4, 3, 2, 1]</span><br><span class="line">// 注意：原数组被修改了哦</span><br><span class="line">console.log(arrReverse); //[5, 4, 3, 2, 1]</span><br></pre></td></tr></table></figure>
-<h3 id="数组排序：sort"><a href="#数组排序：sort" class="headerlink" title="数组排序：sort()"></a>数组排序：sort()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vvar arrSort = [&apos;a&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;,&apos;d&apos;];</span><br><span class="line"> console.log(arrSort.sort()); //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br><span class="line"> // 注意：原数组被修改了哦</span><br><span class="line"> console.log(arrSort); //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br><span class="line"> //让我们再来看看数字</span><br><span class="line"> var arrSortNumber = [1,19,2,25,8];</span><br><span class="line"> console.log(arrSortNumber.sort()); //[1, 19, 2, 25, 8]</span><br></pre></td></tr></table></figure>
-<p>可以看到arrSortNumber没有按照我们期望的输出，因为如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。让我们看看如何对数字进行正确的排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var arrSortNumber = [1,19,2,25,8];</span><br><span class="line">// 升序排列</span><br><span class="line">console.log(arrSortNumber.sort(function(a,b)&#123;</span><br><span class="line">    return a-b;    //[1, 2, 8, 19, 25]</span><br><span class="line">&#125;)); </span><br><span class="line">// 降序排列</span><br><span class="line">console.log(arrSortNumber.sort(function(a,b)&#123;</span><br><span class="line">    return b-a;    //[[25, 19, 8, 2, 1]</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure></p>
+<h3 id="数组排序：sort"><a href="#数组排序：sort" class="headerlink" title="数组排序：sort()"></a>数组排序：sort()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arrSort = [&apos;a&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;,&apos;d&apos;];</span><br><span class="line"> console.log(arrSort.sort()); //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br><span class="line"> // 注意：原数组被修改了哦</span><br><span class="line"> console.log(arrSort); //[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;]</span><br><span class="line"> //让我们再来看看数字</span><br><span class="line"> var arrSortNumber = [1,19,2,25,8];</span><br><span class="line"> console.log(arrSortNumber.sort()); //[1, 19, 2, 25, 8]</span><br></pre></td></tr></table></figure>
+<p>可以看到 arrSortNumber 没有按照我们期望的输出，因为如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。让我们看看如何对数字进行正确的排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var arrSortNumber = [1,19,2,25,8];</span><br><span class="line">// 升序排列</span><br><span class="line">console.log(arrSortNumber.sort(function(a,b)&#123;</span><br><span class="line">    return a-b;    //[1, 2, 8, 19, 25]</span><br><span class="line">&#125;));</span><br><span class="line">// 降序排列</span><br><span class="line">console.log(arrSortNumber.sort(function(a,b)&#123;</span><br><span class="line">    return b-a;    //[[25, 19, 8, 2, 1]</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
 <h3 id="数组拼接：splice"><a href="#数组拼接：splice" class="headerlink" title="数组拼接：splice()"></a>数组拼接：splice()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var arrSplice = [&apos;a&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;,&apos;d&apos;];</span><br><span class="line">console.log(arrSplice.splice(2)); //[&apos;e&apos;,&apos;b&apos;,&apos;d&apos;]</span><br><span class="line">// 注意：原数组被修改了</span><br><span class="line">console.log(arrSplice); //[&quot;a&quot;, &quot;c&quot;]</span><br><span class="line">var arrSplice2 = [&apos;b&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;,&apos;d&apos;];</span><br><span class="line">console.log(arrSplice2.splice(2,2)); //[&apos;e&apos;,&apos;b&apos;]</span><br><span class="line">console.log(arrSplice2); //[[&quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</span><br><span class="line">var arrSplice3 = [&apos;c&apos;,&apos;c&apos;,&apos;e&apos;,&apos;b&apos;,&apos;d&apos;];</span><br><span class="line">console.log(arrSplice3.splice(2,2,&apos;h&apos;,&apos;j&apos;)); //[&quot;e&quot;, &quot;b&quot;]</span><br><span class="line">console.log(arrSplice3); //[&quot;c&quot;, &quot;c&quot;, &quot;h&quot;, &quot;j&quot;, &quot;d&quot;]</span><br></pre></td></tr></table></figure>
-<p>从以上代码可以总结下splice()的使用方法<br>splice(start,number,item);<br>start：必选参数，代表要删除的起始位置，包括该位置<br>number：可选参数，删除的个数<br>item: 可选参数，插入的片段</p>
-<h3 id="数组增删："><a href="#数组增删：" class="headerlink" title="数组增删："></a>数组增删：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var arrOperate = [];</span><br><span class="line">//push()数组尾部增加元素</span><br><span class="line">arrOperate.push(1,2);</span><br><span class="line">console.log(arrOperate);  //[1,2]</span><br><span class="line">//通过length的方式在尾部增加元素</span><br><span class="line">arrOperate[arrOperate.length] = 3;</span><br><span class="line">console.log(arrOperate);//[1,2,3]</span><br><span class="line">//在数组头部增加元素</span><br><span class="line">arrOperate.unshift(-1,0);</span><br><span class="line">console.log(arrOperate);  //[-1,0,1,2,3]</span><br><span class="line">//delete方法只是将对应元素改成Undefined</span><br><span class="line">delete arrOperate[0];</span><br><span class="line">console.log(arrOperate);  //[undefined,0,1,2,3]</span><br><span class="line">如果0位置设置为&quot;undefined&quot;，则为true</span><br><span class="line">console.log(0 in arrOperate);  //false</span><br><span class="line">//pop()删除元素的最后一位</span><br><span class="line">arrOperate.pop();  </span><br><span class="line">console.log(arrOperate); //[undefined,0,1,2]</span><br><span class="line">//pop()删除元素的第一位</span><br><span class="line">arrOperate.shift();  </span><br><span class="line">console.log(arrOperate); //[0,1,2]</span><br></pre></td></tr></table></figure>
+<p>从以上代码可以总结下 splice()的使用方法<br>splice(start,number,item);<br>start：必选参数，代表要删除的起始位置，包括该位置<br>number：可选参数，删除的个数<br>item: 可选参数，插入的片段</p>
+<h3 id="数组增删："><a href="#数组增删：" class="headerlink" title="数组增删："></a>数组增删：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var arrOperate = [];</span><br><span class="line">//push()数组尾部增加元素</span><br><span class="line">arrOperate.push(1,2);</span><br><span class="line">console.log(arrOperate);  //[1,2]</span><br><span class="line">//通过length的方式在尾部增加元素</span><br><span class="line">arrOperate[arrOperate.length] = 3;</span><br><span class="line">console.log(arrOperate);//[1,2,3]</span><br><span class="line">//在数组头部增加元素</span><br><span class="line">arrOperate.unshift(-1,0);</span><br><span class="line">console.log(arrOperate);  //[-1,0,1,2,3]</span><br><span class="line">//delete方法只是将对应元素改成Undefined</span><br><span class="line">delete arrOperate[0];</span><br><span class="line">console.log(arrOperate);  //[undefined,0,1,2,3]</span><br><span class="line">如果0位置设置为&quot;undefined&quot;，则为true</span><br><span class="line">console.log(0 in arrOperate);  //false</span><br><span class="line">//pop()删除元素的最后一位</span><br><span class="line">arrOperate.pop();</span><br><span class="line">console.log(arrOperate); //[undefined,0,1,2]</span><br><span class="line">//pop()删除元素的第一位</span><br><span class="line">arrOperate.shift();</span><br><span class="line">console.log(arrOperate); //[0,1,2]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -288,6 +294,15 @@ var a = new Donate({
     
 <nav id="article-nav">
   
+    <a href="/手机端调用搜索键盘/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          手机端调用搜索键盘
+        
+      </div>
+    </a>
+  
   
     <a href="/天花乱坠的数组方法(一)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
@@ -315,6 +330,114 @@ var a = new Donate({
       </div>
       
       <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关注我</h3>
+    <div class="widget widget_athemes_social_icons">
+
+    	<ul class="clearfix widget-social-icons">   
+    	
+          
+     			  <li><a href="https://github.com/GWJacqueline" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="https://www.weibo.com/jacquelineguo?is_all=1" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+            <li><a href="mailto:822731906@qq.com?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
+          
+   		
+   		</ul>
+
+
+   		<!--
+   		<ul class="clearfix widget-social-icons">   		
+   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
+		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
+			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
+			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
+			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
+			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
+		</ul> -->
+
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容性/">兼容性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/返回/">返回</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/兼容性/" style="font-size: 10px;">兼容性</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/移动端/" style="font-size: 20px;">移动端</a> <a href="/tags/返回/" style="font-size: 10px;">返回</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/手机端调用搜索键盘/">手机端调用搜索键盘</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(二)/">天花乱坠的数组方法(二)</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(一)/">天花乱坠的数组方法(一)</a>
+          </li>
+        
+          <li>
+            <a href="/移动端常见兼容性问题/">移动端常见兼容性问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
   
 
   <div class="container">

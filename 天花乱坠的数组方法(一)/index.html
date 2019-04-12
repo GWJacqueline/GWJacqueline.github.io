@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是 JS 当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下 ES6 中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下 ES5">
 <meta name="keywords" content="ES6,数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="天花乱坠的数组方法(一)">
 <meta property="og:url" content="https://gwjacqueline.github.io/天花乱坠的数组方法(一)/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是 JS 当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下 ES6 中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下 ES5">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/forEachFlow.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/mapFlow.png">
@@ -26,10 +26,10 @@
 <meta property="og:image" content="https://gwjacqueline.github.io/images/everyFlow.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/someFlow.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/reduceFlow.png">
-<meta property="og:updated_time" content="2019-04-07T11:10:16.000Z">
+<meta property="og:updated_time" content="2019-04-12T01:43:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天花乱坠的数组方法(一)">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数组是 JS 当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下 ES6 中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下 ES5">
 <meta name="twitter:image" content="https://gwjacqueline.github.io/images/forEachFlow.png">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
@@ -188,7 +188,7 @@
     <div class="article-meta">
       
 	<a href="/天花乱坠的数组方法(一)/" class="article-date">
-	  <time datetime="2019-04-07T11:10:16.000Z" itemprop="datePublished">2019-04-07</time>
+	  <time datetime="2019-04-06T09:52:39.000Z" itemprop="datePublished">2019-04-06</time>
 	</a>
 
       
@@ -207,15 +207,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组是JS当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下ES6中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下ES5之前的数组方法。<br><a id="more"></a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组是 JS 当中很重要的一个部分，它有很多很多很多的方法，对于我这样记性不好的人来说，一些不常用的方法经常会被遗忘，经常需要再次查找才能想起来。今天为了能给自己加深对数组方法的记忆，将通过两个章节去整理下常用的数组方法。第一个章节将记录下 ES6 中常见的数组方法，其中将详细记录下部分数组，第二个章节将简单整理下 ES5 之前的数组方法。</p>
 </blockquote>
-<h2 id="ES6中新增的数组方法"><a href="#ES6中新增的数组方法" class="headerlink" title="ES6中新增的数组方法"></a>ES6中新增的数组方法</h2><h3 id="数组元素遍历：for循环-forEach"><a href="#数组元素遍历：for循环-forEach" class="headerlink" title="数组元素遍历：for循环/forEach()"></a>数组元素遍历：for循环/forEach()</h3><p>在ES6之前还没有forEach()方法时，我们通常是使用for循环对数组进行遍历的。</p>
-<h4 id="ES5之前：for循环遍历数组实例："><a href="#ES5之前：for循环遍历数组实例：" class="headerlink" title="ES5之前：for循环遍历数组实例："></a>ES5之前：for循环遍历数组实例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//通过for循环将数组中的元素遍历出来</span><br><span class="line">var color = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;];</span><br><span class="line">for(var i=0;i&lt;color.length;i++)&#123;</span><br><span class="line">  console.log(color[i]);   //blue,yellow,red</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有了forEach()方法后，数组的遍历整体变得更加可观，直接用数组调用对应的内容</p>
-<h4 id="forEach-遍历数组实例："><a href="#forEach-遍历数组实例：" class="headerlink" title="forEach()遍历数组实例："></a>forEach()遍历数组实例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var colorES6 = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;,&apos;white&apos;]; </span><br><span class="line">//forEach()中放一个迭代函数，colorES6作为形参去接受数组里的每一个内容</span><br><span class="line">colorES6.forEach(function(colorES6)&#123;  </span><br><span class="line">    console.log(colorES6);   //blue,yellow,red,white</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h5 id="forEach-遍历数组的优点："><a href="#forEach-遍历数组的优点：" class="headerlink" title="forEach()遍历数组的优点："></a>forEach()遍历数组的优点：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//求数组元素的总和</span><br><span class="line">var numbers = [1,2,3,4,5];</span><br><span class="line">var sum = 0; //用于接收数组的总和</span><br><span class="line">//forEach可以将函数抽离出来</span><br><span class="line">function num(number)&#123;</span><br><span class="line">    sum+=number;</span><br><span class="line">&#125;</span><br><span class="line">numbers.forEach(num); </span><br><span class="line">console.log(sum);   //15</span><br></pre></td></tr></table></figure>
-<p>以上代码我们可以看出forEach()的好处不止让代码变得更加可观，可以直接调用数组里的内容，还可以将函数抽离出来</p>
-<h5 id="forEach-遍历数组的过程："><a href="#forEach-遍历数组的过程：" class="headerlink" title="forEach()遍历数组的过程："></a>forEach()遍历数组的过程：</h5><p>为了能加深对forEach()的理解，可以用一个流程图来简单画出forEach()遍历数组的过程：</p>
+<a id="more"></a>
+<h2 id="ES6-中新增的数组方法"><a href="#ES6-中新增的数组方法" class="headerlink" title="ES6 中新增的数组方法"></a>ES6 中新增的数组方法</h2><h3 id="数组元素遍历：for-循环-forEach"><a href="#数组元素遍历：for-循环-forEach" class="headerlink" title="数组元素遍历：for 循环/forEach()"></a>数组元素遍历：for 循环/forEach()</h3><p>在 ES6 之前还没有 forEach()方法时，我们通常是使用 for 循环对数组进行遍历的。</p>
+<h4 id="ES5-之前：for-循环遍历数组实例："><a href="#ES5-之前：for-循环遍历数组实例：" class="headerlink" title="ES5 之前：for 循环遍历数组实例："></a>ES5 之前：for 循环遍历数组实例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//通过for循环将数组中的元素遍历出来</span><br><span class="line">var color = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;];</span><br><span class="line">for(var i=0;i&lt;color.length;i++)&#123;</span><br><span class="line">  console.log(color[i]);   //blue,yellow,red</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有了 forEach()方法后，数组的遍历整体变得更加可观，直接用数组调用对应的内容</p>
+<h4 id="forEach-遍历数组实例："><a href="#forEach-遍历数组实例：" class="headerlink" title="forEach()遍历数组实例："></a>forEach()遍历数组实例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var colorES6 = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;,&apos;white&apos;];</span><br><span class="line">//forEach()中放一个迭代函数，colorES6作为形参去接受数组里的每一个内容</span><br><span class="line">colorES6.forEach(function(colorES6)&#123;</span><br><span class="line">    console.log(colorES6);   //blue,yellow,red,white</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="forEach-遍历数组的优点："><a href="#forEach-遍历数组的优点：" class="headerlink" title="forEach()遍历数组的优点："></a>forEach()遍历数组的优点：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//求数组元素的总和</span><br><span class="line">var numbers = [1,2,3,4,5];</span><br><span class="line">var sum = 0; //用于接收数组的总和</span><br><span class="line">//forEach可以将函数抽离出来</span><br><span class="line">function num(number)&#123;</span><br><span class="line">    sum+=number;</span><br><span class="line">&#125;</span><br><span class="line">numbers.forEach(num);</span><br><span class="line">console.log(sum);   //15</span><br></pre></td></tr></table></figure>
+<p>以上代码我们可以看出 forEach()的好处不止让代码变得更加可观，可以直接调用数组里的内容，还可以将函数抽离出来</p>
+<h5 id="forEach-遍历数组的过程："><a href="#forEach-遍历数组的过程：" class="headerlink" title="forEach()遍历数组的过程："></a>forEach()遍历数组的过程：</h5><p>为了能加深对 forEach()的理解，可以用一个流程图来简单画出 forEach()遍历数组的过程：</p>
 <p><div align="center"><br>  <img width="350" src="../images/forEachFlow.png" alt="forEach()遍历数组过程" title="forEach()遍历数组过程"><br></div><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图中画的是”forEach()遍历数组实例”中的过程：第一次先将blue放在迭代器里，将它打印出来，第二次再将yellow放在迭代器里，将它打印出来，以此类推。 直达找到最后一个没有的时候，那么当前的循环就结束了。</p>
 <h5 id="forEach-使用的场景："><a href="#forEach-使用的场景：" class="headerlink" title="forEach()使用的场景："></a>forEach()使用的场景：</h5><p>比如：一个表单有一个多选框，再提交表单时，需要遍历选中的元素并进行相应操作。</p>
 <h3 id="数组的映射：map"><a href="#数组的映射：map" class="headerlink" title="数组的映射：map()"></a>数组的映射：map()</h3><p>映射这两个字大家可能会觉得有点抽象，通俗点来说就是对数组进行一些转化。常用的场景有两种：<br>1.在拷贝数组的过程中改变一些东西<br>2.在数组中拿到一些固定的属性<br>接下来我将用for循环和ES6新方法map()编写上面两种场景</p>
@@ -362,7 +363,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6中新增的数组方法"><span class="nav-number">1.</span> <span class="nav-text">ES6中新增的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素遍历：for循环-forEach"><span class="nav-number">1.1.</span> <span class="nav-text">数组元素遍历：for循环/forEach()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES5之前：for循环遍历数组实例："><span class="nav-number">1.1.1.</span> <span class="nav-text">ES5之前：for循环遍历数组实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forEach-遍历数组实例："><span class="nav-number">1.1.2.</span> <span class="nav-text">forEach()遍历数组实例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-遍历数组的优点："><span class="nav-number">1.1.2.1.</span> <span class="nav-text">forEach()遍历数组的优点：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-遍历数组的过程："><span class="nav-number">1.1.2.2.</span> <span class="nav-text">forEach()遍历数组的过程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-使用的场景："><span class="nav-number">1.1.2.3.</span> <span class="nav-text">forEach()使用的场景：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的映射：map"><span class="nav-number">1.2.</span> <span class="nav-text">数组的映射：map()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：将数组A以两倍的形式放到数组B中去"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景一：将数组A以两倍的形式放到数组B中去</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ES5之前：for循环-push-实现场景一"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">ES5之前：for循环+push()实现场景一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map-实现场景一"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">map()实现场景一</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：有一个对象数组A，把数组A中对象的name属性存储到对象B上"><span class="nav-number">1.2.2.</span> <span class="nav-text">场景二：有一个对象数组A，把数组A中对象的name属性存储到对象B上</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ES5之前：for循环-push-实现场景二"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">ES5之前：for循环+push()实现场景二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map-实现场景二"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">map()实现场景二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map-映射数组的过程："><span class="nav-number">1.2.3.</span> <span class="nav-text">map()映射数组的过程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用场景："><span class="nav-number">1.2.4.</span> <span class="nav-text">使用场景：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的过滤：filter"><span class="nav-number">1.3.</span> <span class="nav-text">数组的过滤：filter()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一："><span class="nav-number">1.3.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二："><span class="nav-number">1.3.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景三："><span class="nav-number">1.3.3.</span> <span class="nav-text">场景三：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter-过滤数组的过程："><span class="nav-number">1.3.4.</span> <span class="nav-text">filter()过滤数组的过程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的查找：find"><span class="nav-number">1.4.</span> <span class="nav-text">数组的查找：find()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find-的工作流程："><span class="nav-number">1.4.3.</span> <span class="nav-text">find()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一真即真，一假即假的：every-、some"><span class="nav-number">1.5.</span> <span class="nav-text">一真即真，一假即假的：every()、some()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-2"><span class="nav-number">1.5.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#every-的工作流程："><span class="nav-number">1.5.3.</span> <span class="nav-text">every()的工作流程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#some-的工作流程："><span class="nav-number">1.5.4.</span> <span class="nav-text">some()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把数组聚合成结果-reduce"><span class="nav-number">1.6.</span> <span class="nav-text">把数组聚合成结果 reduce()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-3"><span class="nav-number">1.6.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景三：-1"><span class="nav-number">1.6.3.</span> <span class="nav-text">场景三：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reduce-的工作流程："><span class="nav-number">1.6.4.</span> <span class="nav-text">reduce()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduceRight"><span class="nav-number">1.7.</span> <span class="nav-text">reduceRight()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索indexOf"><span class="nav-number">1.8.</span> <span class="nav-text">数组的检索indexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索lastndexOf"><span class="nav-number">1.9.</span> <span class="nav-text">数组的检索lastndexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索indexOf-1"><span class="nav-number">1.10.</span> <span class="nav-text">数组的检索indexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否为数组-isArray"><span class="nav-number">1.11.</span> <span class="nav-text">判断是否为数组 isArray()</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-中新增的数组方法"><span class="nav-number">1.</span> <span class="nav-text">ES6 中新增的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素遍历：for-循环-forEach"><span class="nav-number">1.1.</span> <span class="nav-text">数组元素遍历：for 循环/forEach()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES5-之前：for-循环遍历数组实例："><span class="nav-number">1.1.1.</span> <span class="nav-text">ES5 之前：for 循环遍历数组实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forEach-遍历数组实例："><span class="nav-number">1.1.2.</span> <span class="nav-text">forEach()遍历数组实例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-遍历数组的优点："><span class="nav-number">1.1.2.1.</span> <span class="nav-text">forEach()遍历数组的优点：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-遍历数组的过程："><span class="nav-number">1.1.2.2.</span> <span class="nav-text">forEach()遍历数组的过程：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-使用的场景："><span class="nav-number">1.1.2.3.</span> <span class="nav-text">forEach()使用的场景：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的映射：map"><span class="nav-number">1.2.</span> <span class="nav-text">数组的映射：map()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：将数组A以两倍的形式放到数组B中去"><span class="nav-number">1.2.1.</span> <span class="nav-text">场景一：将数组A以两倍的形式放到数组B中去</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ES5之前：for循环-push-实现场景一"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">ES5之前：for循环+push()实现场景一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map-实现场景一"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">map()实现场景一</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：有一个对象数组A，把数组A中对象的name属性存储到对象B上"><span class="nav-number">1.2.2.</span> <span class="nav-text">场景二：有一个对象数组A，把数组A中对象的name属性存储到对象B上</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ES5之前：for循环-push-实现场景二"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">ES5之前：for循环+push()实现场景二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map-实现场景二"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">map()实现场景二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map-映射数组的过程："><span class="nav-number">1.2.3.</span> <span class="nav-text">map()映射数组的过程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用场景："><span class="nav-number">1.2.4.</span> <span class="nav-text">使用场景：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的过滤：filter"><span class="nav-number">1.3.</span> <span class="nav-text">数组的过滤：filter()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一："><span class="nav-number">1.3.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二："><span class="nav-number">1.3.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景三："><span class="nav-number">1.3.3.</span> <span class="nav-text">场景三：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter-过滤数组的过程："><span class="nav-number">1.3.4.</span> <span class="nav-text">filter()过滤数组的过程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的查找：find"><span class="nav-number">1.4.</span> <span class="nav-text">数组的查找：find()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find-的工作流程："><span class="nav-number">1.4.3.</span> <span class="nav-text">find()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一真即真，一假即假的：every-、some"><span class="nav-number">1.5.</span> <span class="nav-text">一真即真，一假即假的：every()、some()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-2"><span class="nav-number">1.5.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#every-的工作流程："><span class="nav-number">1.5.3.</span> <span class="nav-text">every()的工作流程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#some-的工作流程："><span class="nav-number">1.5.4.</span> <span class="nav-text">some()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把数组聚合成结果-reduce"><span class="nav-number">1.6.</span> <span class="nav-text">把数组聚合成结果 reduce()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">场景一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：-3"><span class="nav-number">1.6.2.</span> <span class="nav-text">场景二：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景三：-1"><span class="nav-number">1.6.3.</span> <span class="nav-text">场景三：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reduce-的工作流程："><span class="nav-number">1.6.4.</span> <span class="nav-text">reduce()的工作流程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduceRight"><span class="nav-number">1.7.</span> <span class="nav-text">reduceRight()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索indexOf"><span class="nav-number">1.8.</span> <span class="nav-text">数组的检索indexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索lastndexOf"><span class="nav-number">1.9.</span> <span class="nav-text">数组的检索lastndexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的检索indexOf-1"><span class="nav-number">1.10.</span> <span class="nav-text">数组的检索indexOf()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否为数组-isArray"><span class="nav-number">1.11.</span> <span class="nav-text">判断是否为数组 isArray()</span></a></li></ol></li></ol>
     
     </div>
   </aside>
@@ -372,6 +373,114 @@ var a = new Donate({
       </div>
       
       <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关注我</h3>
+    <div class="widget widget_athemes_social_icons">
+
+    	<ul class="clearfix widget-social-icons">   
+    	
+          
+     			  <li><a href="https://github.com/GWJacqueline" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="https://www.weibo.com/jacquelineguo?is_all=1" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+            <li><a href="mailto:822731906@qq.com?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
+          
+   		
+   		</ul>
+
+
+   		<!--
+   		<ul class="clearfix widget-social-icons">   		
+   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
+		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
+			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
+			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
+			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
+			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
+		</ul> -->
+
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容性/">兼容性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/返回/">返回</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/兼容性/" style="font-size: 10px;">兼容性</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/移动端/" style="font-size: 20px;">移动端</a> <a href="/tags/返回/" style="font-size: 10px;">返回</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/手机端调用搜索键盘/">手机端调用搜索键盘</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(二)/">天花乱坠的数组方法(二)</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(一)/">天花乱坠的数组方法(一)</a>
+          </li>
+        
+          <li>
+            <a href="/移动端常见兼容性问题/">移动端常见兼容性问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
   
 
   <div class="container">

@@ -11,13 +11,13 @@
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些 Bug。">
 <meta name="keywords" content="移动端,兼容性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端常见兼容性问题">
 <meta property="og:url" content="https://gwjacqueline.github.io/移动端常见兼容性问题/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些 Bug。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/androidFixed.png">
@@ -29,10 +29,10 @@
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn1.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iosfBtn2.png">
 <meta property="og:image" content="https://gwjacqueline.github.io/images/iospsw.jpeg">
-<meta property="og:updated_time" content="2019-04-06T10:49:03.000Z">
+<meta property="og:updated_time" content="2019-04-12T01:44:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端常见兼容性问题">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些 Bug。">
 <meta name="twitter:image" content="https://gwjacqueline.github.io/images/fixedBug.png">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
@@ -191,7 +191,7 @@
     <div class="article-meta">
       
 	<a href="/移动端常见兼容性问题/" class="article-date">
-	  <time datetime="2019-04-06T10:49:03.000Z" itemprop="datePublished">2019-04-06</time>
+	  <time datetime="2016-11-20T13:55:38.000Z" itemprop="datePublished">2016-11-20</time>
 	</a>
 
       
@@ -210,9 +210,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些Bug。<br><a id="more"></a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;本文主要想记录下最近工作中遇到的一些移动端兼容问题，便于日后能够快速解决一些 Bug。</p>
 </blockquote>
-<h3 id="ios-fixed定位-长表单"><a href="#ios-fixed定位-长表单" class="headerlink" title="ios fixed定位+长表单"></a>ios fixed定位+长表单</h3><p><div align="center"><br>  <img width="200" src="../images/fixedBug.png" alt="ios fixed bug实例" title="ios fixed定位+长表单"><br></div></p>
+<a id="more"></a>
+<h3 id="ios-fixed-定位-长表单"><a href="#ios-fixed-定位-长表单" class="headerlink" title="ios fixed 定位+长表单"></a>ios fixed 定位+长表单</h3><p><div align="center"><br>  <img width="200" src="../images/fixedBug.png" alt="ios fixed bug实例" title="ios fixed定位+长表单"><br></div></p>
 <h4 id="主要代码："><a href="#主要代码：" class="headerlink" title="主要代码："></a>主要代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">      &lt;!-- fixed定位的头部 --&gt;</span><br><span class="line">  &lt;header&gt;</span><br><span class="line">  &lt;section&gt;</span><br><span class="line">      &lt;!-- 自然布局 --&gt;</span><br><span class="line">  &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="bug描述："><a href="#bug描述：" class="headerlink" title="bug描述："></a>bug描述：</h4><p>只有在ios上出现：当section过长(有滚动条时)，表单获取焦点时。上图红色框的头部会掉落至绿色部分。</p>
 <h4 id="bug解决："><a href="#bug解决：" class="headerlink" title="bug解决："></a>bug解决：</h4><p>造成问题的原因：当表单获取焦点，键盘弹出时，可视高度变小。<br>解决方式：表单获取焦点时，把fixed定位改成absolute;失去焦点时，改回来。<br>个人建议：在实际开发中，避免让头部使用fixed定位。页面整体建议采用flex布局，减少页面高度计算。</p>
@@ -248,14 +249,16 @@
 <h3 id="ios-fixed按钮上下飘动"><a href="#ios-fixed按钮上下飘动" class="headerlink" title="ios fixed按钮上下飘动"></a>ios fixed按钮上下飘动</h3><p><div align="center"><br> <img width="200" src="../images/iosfBtn1.png" alt="ios fixed按钮正常情况" title="ios fixed按钮正常情况"><br> <img width="200" src="../images/iosfBtn2.png" alt="ios fixed按钮飘动情况" title="ios fixed按钮飘动情况"><br></div></p>
 <h4 id="主要代码：-6"><a href="#主要代码：-6" class="headerlink" title="主要代码："></a>主要代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;header&gt;</span><br><span class="line">      &lt;!-- 头部代码  绝对定位--&gt;</span><br><span class="line">   &lt;/header&gt;</span><br><span class="line">   &lt;!-- 内容代码  绝对定位--&gt;</span><br><span class="line">   &lt;section class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;!-- 列表 --&gt;</span><br><span class="line">        &lt;ul&gt;&lt;/ul&gt;</span><br><span class="line">       &lt;!-- fixed置底定位按钮 --&gt;</span><br><span class="line">       &lt;section class=&quot;btn-wrap&quot;&gt;</span><br><span class="line">           &lt;input value=&quot;打开&quot;&gt;</span><br><span class="line">       &lt;/section&gt;</span><br><span class="line">   &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="bug描述：-7"><a href="#bug描述：-7" class="headerlink" title="bug描述："></a>bug描述：</h4><p>只出现在ios上，当列表ul过长时，快速滚动页面，fixed置底按钮会上下飘动</p>
-<h4 id="bug解决：-7"><a href="#bug解决：-7" class="headerlink" title="bug解决："></a>bug解决：</h4><p>解决方式：将fixed置底定位的按钮移到最外层<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;header&gt;</span><br><span class="line">      &lt;!-- 头部代码  绝对定位--&gt;</span><br><span class="line">   &lt;/header&gt;</span><br><span class="line">   &lt;!-- 内容代码  绝对定位--&gt;</span><br><span class="line">   &lt;section class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;!-- 列表 --&gt;</span><br><span class="line">        &lt;ul&gt;&lt;/ul&gt;</span><br><span class="line">   &lt;/section&gt;</span><br><span class="line">   &lt;!-- fixed置底定位按钮 移到最外层--&gt;</span><br><span class="line">   &lt;section class=&quot;btn-wrap&quot;&gt;</span><br><span class="line">       &lt;input value=&quot;打开&quot;&gt;</span><br><span class="line">   &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="bug解决：-7"><a href="#bug解决：-7" class="headerlink" title="bug解决："></a>bug解决：</h4><p>解决方式：将fixed置底定位的按钮移到最外层<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;header&gt;</span><br><span class="line">      &lt;!-- 头部代码  绝对定位--&gt;</span><br><span class="line">   &lt;/header&gt;</span><br><span class="line">   &lt;!-- 内容代码  绝对定位--&gt;</span><br><span class="line">   &lt;section class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;!-- 列表 --&gt;</span><br><span class="line">        &lt;ul&gt;&lt;/ul&gt;</span><br><span class="line">   &lt;/section&gt;</span><br><span class="line">   &lt;!-- fixed置底定位按钮 移到最外层--&gt;</span><br><span class="line">   &lt;section class=&quot;btn-wrap&quot;&gt;</span><br><span class="line">       &lt;input value=&quot;打开&quot;&gt;</span><br><span class="line">   &lt;/section&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></p>
 <h3 id="h5虚拟键盘，密码框假光标移动问题"><a href="#h5虚拟键盘，密码框假光标移动问题" class="headerlink" title="h5虚拟键盘，密码框假光标移动问题"></a>h5虚拟键盘，密码框假光标移动问题</h3><p><div align="center"><br>  <img width="200" src="../images/iospsw.jpeg" alt="ios 假光标" title="ios 假光标"><br></div></p>
 <h4 id="描述："><a href="#描述：" class="headerlink" title="描述："></a>描述：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在使用h5虚拟键盘时，需要让输入框disabled,以至于没有系统光标。需要编写一个假光标，提升用户体验。因为输入框采用”type=”password”,所以会采用系统自带的密码遮掩点。每个系统密码遮掩点都不大一样。经过多台真机的多次调试，发现大致可分为四类：大部分安卓、vivo X9S、Vivo X20、ios。为了便于以后遇到类似问题，又需要大量时间进行调试，现在先记录下调试结果。</p>
 <h4 id="光标移动距离的计算："><a href="#光标移动距离的计算：" class="headerlink" title="光标移动距离的计算："></a>光标移动距离的计算：</h4><blockquote>
 <p>光标移动距离=(密码个数*dotWidth)em;<br>Ios: dotWidth=1<br>vivo X9S: dotWidth=0.5<br>Vivo X20: dotWidth=0.49<br>其余机型：dotWidth=0.34<br>获取机型的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(navigator.userAgent.indexOf(“vivo X9s”)!==-1)&#123;</span><br><span class="line">    alert(&quot;是vivo X9s&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <h3 id="弹性盒子兼容问题"><a href="#弹性盒子兼容问题" class="headerlink" title="弹性盒子兼容问题"></a>弹性盒子兼容问题</h3><h4 id="描述：-1"><a href="#描述：-1" class="headerlink" title="描述："></a>描述：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;之前做过基于Android的智能电视项目，最早的需求是说最低兼容到Android5.0以上，于是就疯狂舒畅自由的使用新版盒子模型的写法。可是需求总是多变的，在开发接近尾声的时候，改成了兼容到Android3还是4。于是在低版本电视上盒子布局的前端页面变得面目全非。导致后来在使用盒子模型的时候总是小心翼翼，毕竟低版本的电视和手机还是有人用的。现在就记录下常见盒子模型的兼容写法把，能够让我们在面对测试提出页面bug的时候，快速定位问题所在并且解决它~</p>
-<h4 id="兼容写法："><a href="#兼容写法：" class="headerlink" title="兼容写法："></a>兼容写法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">//flex布局</span><br><span class="line">.flex&#123;</span><br><span class="line">    display: -webkit-box; /* 老版本语法 */</span><br><span class="line">    display: -moz-box;    /* 老版本语法: Firefox/</span><br><span class="line">    display: -webkit-flex; /* 新版本语法*/</span><br><span class="line">    display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//两端对齐</span><br><span class="line">.flex-between&#123;</span><br><span class="line">    -webkit-box-pack: justify;</span><br><span class="line">    -moz-justify-content: space-between;</span><br><span class="line">    -webkit-justify-content: space-between;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//左右、上下居中</span><br><span class="line">.flex-center&#123;</span><br><span class="line">    -webkit-box-pack: center;     /* 左右 */</span><br><span class="line">    -moz-justify-content: center;</span><br><span class="line">    -webkit-justify-content: center;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    -webkit-box-align: center;    /* 上下 */</span><br><span class="line">    -moz-align-items: center;</span><br><span class="line">    -webkit-align-items: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//垂直对齐</span><br><span class="line">.flex-column&#123;</span><br><span class="line">    -webkit-box-direction: normal;</span><br><span class="line">    -webkit-box-orient: vertical;</span><br><span class="line">    -moz-flex-direction: column;</span><br><span class="line">    -webkit-flex-direction: column;</span><br><span class="line">    flex-direction: column;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//盒子相应比例(scss写法)</span><br><span class="line">@mixin flex-block($con:1)&#123;</span><br><span class="line">    -webkit-box-flex: 1;</span><br><span class="line">    -moz-box-flex: 1;</span><br><span class="line">    -ms-flex: $con;</span><br><span class="line">    -webkit-flex: $con;</span><br><span class="line">    flex: $con;</span><br><span class="line">&#125;</span><br><span class="line">//引用方法：@include flex-block($con),能够快速实现想要的比例</span><br></pre></td></tr></table></figure>
+<h4 id="兼容写法："><a href="#兼容写法：" class="headerlink" title="兼容写法："></a>兼容写法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//flex 布局</span><br><span class="line">.flex&#123;</span><br><span class="line">display: -webkit-box; /_ 老版本语法 _/</span><br><span class="line">display: -moz-box; /_ 老版本语法: Firefox/</span><br><span class="line">display: -webkit-flex; /_ 新版本语法\*/</span><br><span class="line">display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//两端对齐</span><br><span class="line">.flex-between&#123;</span><br><span class="line">-webkit-box-pack: justify;</span><br><span class="line">-moz-justify-content: space-between;</span><br><span class="line">-webkit-justify-content: space-between;</span><br><span class="line">justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//左右、上下居中</span><br><span class="line">.flex-center&#123;</span><br><span class="line">-webkit-box-pack: center; /_ 左右 _/</span><br><span class="line">-moz-justify-content: center;</span><br><span class="line">-webkit-justify-content: center;</span><br><span class="line">justify-content: center;</span><br><span class="line">-webkit-box-align: center; /_ 上下 _/</span><br><span class="line">-moz-align-items: center;</span><br><span class="line">-webkit-align-items: center;</span><br><span class="line">align-items: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//垂直对齐</span><br><span class="line">.flex-column&#123;</span><br><span class="line">-webkit-box-direction: normal;</span><br><span class="line">-webkit-box-orient: vertical;</span><br><span class="line">-moz-flex-direction: column;</span><br><span class="line">-webkit-flex-direction: column;</span><br><span class="line">flex-direction: column;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//盒子相应比例(scss 写法)</span><br><span class="line">@mixin flex-block($con:1)&#123;</span><br><span class="line">    -webkit-box-flex: 1;</span><br><span class="line">    -moz-box-flex: 1;</span><br><span class="line">    -ms-flex: $con;</span><br><span class="line">-webkit-flex: $con;</span><br><span class="line">    flex: $con;</span><br><span class="line">&#125;</span><br><span class="line">//引用方法：@include flex-block(\$con),能够快速实现想要的比例</span><br></pre></td></tr></table></figure>
+<p><code>`</code></p>
+
       
     </div>
     <footer class="article-footer">
@@ -352,7 +355,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-fixed定位-长表单"><span class="nav-number">1.</span> <span class="nav-text">ios fixed定位+长表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码："><span class="nav-number">1.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述："><span class="nav-number">1.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决："><span class="nav-number">1.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-footer-绝对定位"><span class="nav-number">2.</span> <span class="nav-text">Android footer 绝对定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-1"><span class="nav-number">2.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-1"><span class="nav-number">2.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-1"><span class="nav-number">2.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-微信浏览器-长表单留白"><span class="nav-number">3.</span> <span class="nav-text">ios 微信浏览器 长表单留白</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-2"><span class="nav-number">3.1.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-2"><span class="nav-number">3.2.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transform弹窗不居中"><span class="nav-number">4.</span> <span class="nav-text">transform弹窗不居中</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-2"><span class="nav-number">4.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-3"><span class="nav-number">4.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-3"><span class="nav-number">4.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-输入框背景色变黄"><span class="nav-number">5.</span> <span class="nav-text">ios 输入框背景色变黄</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-3"><span class="nav-number">5.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-4"><span class="nav-number">5.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-4"><span class="nav-number">5.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-弹出框被遮罩层盖住"><span class="nav-number">6.</span> <span class="nav-text">ios 弹出框被遮罩层盖住</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-4"><span class="nav-number">6.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-5"><span class="nav-number">6.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-5"><span class="nav-number">6.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-时间格式"><span class="nav-number">7.</span> <span class="nav-text">ios 时间格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-5"><span class="nav-number">7.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-6"><span class="nav-number">7.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-6"><span class="nav-number">7.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-fixed按钮上下飘动"><span class="nav-number">8.</span> <span class="nav-text">ios fixed按钮上下飘动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-6"><span class="nav-number">8.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-7"><span class="nav-number">8.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-7"><span class="nav-number">8.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h5虚拟键盘，密码框假光标移动问题"><span class="nav-number">9.</span> <span class="nav-text">h5虚拟键盘，密码框假光标移动问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#描述："><span class="nav-number">9.1.</span> <span class="nav-text">描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#光标移动距离的计算："><span class="nav-number">9.2.</span> <span class="nav-text">光标移动距离的计算：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹性盒子兼容问题"><span class="nav-number">10.</span> <span class="nav-text">弹性盒子兼容问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#描述：-1"><span class="nav-number">10.1.</span> <span class="nav-text">描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容写法："><span class="nav-number">10.2.</span> <span class="nav-text">兼容写法：</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-fixed-定位-长表单"><span class="nav-number">1.</span> <span class="nav-text">ios fixed 定位+长表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码："><span class="nav-number">1.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述："><span class="nav-number">1.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决："><span class="nav-number">1.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-footer-绝对定位"><span class="nav-number">2.</span> <span class="nav-text">Android footer 绝对定位</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-1"><span class="nav-number">2.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-1"><span class="nav-number">2.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-1"><span class="nav-number">2.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-微信浏览器-长表单留白"><span class="nav-number">3.</span> <span class="nav-text">ios 微信浏览器 长表单留白</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-2"><span class="nav-number">3.1.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-2"><span class="nav-number">3.2.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transform弹窗不居中"><span class="nav-number">4.</span> <span class="nav-text">transform弹窗不居中</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-2"><span class="nav-number">4.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-3"><span class="nav-number">4.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-3"><span class="nav-number">4.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-输入框背景色变黄"><span class="nav-number">5.</span> <span class="nav-text">ios 输入框背景色变黄</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-3"><span class="nav-number">5.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-4"><span class="nav-number">5.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-4"><span class="nav-number">5.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-弹出框被遮罩层盖住"><span class="nav-number">6.</span> <span class="nav-text">ios 弹出框被遮罩层盖住</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-4"><span class="nav-number">6.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-5"><span class="nav-number">6.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-5"><span class="nav-number">6.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-时间格式"><span class="nav-number">7.</span> <span class="nav-text">ios 时间格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-5"><span class="nav-number">7.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-6"><span class="nav-number">7.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-6"><span class="nav-number">7.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-fixed按钮上下飘动"><span class="nav-number">8.</span> <span class="nav-text">ios fixed按钮上下飘动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要代码：-6"><span class="nav-number">8.1.</span> <span class="nav-text">主要代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug描述：-7"><span class="nav-number">8.2.</span> <span class="nav-text">bug描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bug解决：-7"><span class="nav-number">8.3.</span> <span class="nav-text">bug解决：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h5虚拟键盘，密码框假光标移动问题"><span class="nav-number">9.</span> <span class="nav-text">h5虚拟键盘，密码框假光标移动问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#描述："><span class="nav-number">9.1.</span> <span class="nav-text">描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#光标移动距离的计算："><span class="nav-number">9.2.</span> <span class="nav-text">光标移动距离的计算：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹性盒子兼容问题"><span class="nav-number">10.</span> <span class="nav-text">弹性盒子兼容问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#描述：-1"><span class="nav-number">10.1.</span> <span class="nav-text">描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#兼容写法："><span class="nav-number">10.2.</span> <span class="nav-text">兼容写法：</span></a></li></ol></li></ol>
     
     </div>
   </aside>
@@ -362,6 +365,114 @@ var a = new Donate({
       </div>
       
       <footer id="footer">
+  
+    <aside id="sidebar" class="outer">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关注我</h3>
+    <div class="widget widget_athemes_social_icons">
+
+    	<ul class="clearfix widget-social-icons">   
+    	
+          
+     			  <li><a href="https://github.com/GWJacqueline" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+     			  <li><a href="https://www.weibo.com/jacquelineguo?is_all=1" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
+          
+   		
+          
+            <li><a href="mailto:822731906@qq.com?subject=请联系我&body=我能帮你什么" title="email"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> 
+          
+   		
+   		</ul>
+
+
+   		<!--
+   		<ul class="clearfix widget-social-icons">   		
+   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
+		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
+			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
+			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
+			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
+			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
+		</ul> -->
+
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/兼容性/">兼容性</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/返回/">返回</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/兼容性/" style="font-size: 10px;">兼容性</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/移动端/" style="font-size: 20px;">移动端</a> <a href="/tags/返回/" style="font-size: 10px;">返回</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/手机端调用搜索键盘/">手机端调用搜索键盘</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(二)/">天花乱坠的数组方法(二)</a>
+          </li>
+        
+          <li>
+            <a href="/天花乱坠的数组方法(一)/">天花乱坠的数组方法(一)</a>
+          </li>
+        
+          <li>
+            <a href="/移动端常见兼容性问题/">移动端常见兼容性问题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
   
 
   <div class="container">
