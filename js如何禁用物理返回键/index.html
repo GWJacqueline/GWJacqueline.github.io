@@ -3,28 +3,26 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>手机端调用搜索键盘 | guowj</title>
+  <title>js如何禁用物理返回键 | guowj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="移动端搜索返回">
+  <meta name="keywords" content="物理返回键">
   
   
   
   
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要记录下如何调用系统的搜索键盘，经过实际测试以下代码可以兼容 ios 和 Android 系统">
-<meta name="keywords" content="移动端,搜索,返回">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~">
+<meta name="keywords" content="物理返回键">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手机端调用搜索键盘">
-<meta property="og:url" content="https://gwjacqueline.github.io/手机端调用搜索键盘/index.html">
+<meta property="og:title" content="js如何禁用物理返回键">
+<meta property="og:url" content="https://gwjacqueline.github.io/js如何禁用物理返回键/index.html">
 <meta property="og:site_name" content="guowj">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要记录下如何调用系统的搜索键盘，经过实际测试以下代码可以兼容 ios 和 Android 系统">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://gwjacqueline.github.io/images/searchKey.jpg">
-<meta property="og:updated_time" content="2019-04-12T14:16:05.000Z">
+<meta property="og:updated_time" content="2019-04-13T07:17:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手机端调用搜索键盘">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本文主要记录下如何调用系统的搜索键盘，经过实际测试以下代码可以兼容 ios 和 Android 系统">
-<meta name="twitter:image" content="https://gwjacqueline.github.io/images/searchKey.jpg">
+<meta name="twitter:title" content="js如何禁用物理返回键">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~">
   
     <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
   
@@ -165,7 +163,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-手机端调用搜索键盘" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-js如何禁用物理返回键" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="article-inner">
     
     
@@ -173,7 +171,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      手机端调用搜索键盘
+      js如何禁用物理返回键
     </h1>
   
 
@@ -181,8 +179,8 @@
     
     <div class="article-meta">
       
-	<a href="/手机端调用搜索键盘/" class="article-date">
-	  <time datetime="2019-04-12T08:12:27.000Z" itemprop="datePublished">2019-04-12</time>
+	<a href="/js如何禁用物理返回键/" class="article-date">
+	  <time datetime="2019-04-13T01:36:36.000Z" itemprop="datePublished">2019-04-13</time>
 	</a>
 
       
@@ -201,16 +199,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;本文主要记录下如何调用系统的搜索键盘，经过实际测试以下代码可以兼容 ios 和 Android 系统</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~</p>
 </blockquote>
 <a id="more"></a>
-<p>大家可以用手机测试下<a href="https://gwjacqueline.github.io/searchKey/index.html" title="我的demo">我的 demo</a>是否能正常调用系统的搜索键盘呢？</p>
-<h3 id="Html"><a href="#Html" class="headerlink" title="Html"></a>Html</h3><p><strong>注意点：</strong> 必须在 input 输入框外用 form 表单包起来，并且要加”action”，否则在 ios 上键盘上无法弹出”搜索二字“</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=&quot;formid&quot; action=&quot;#&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;name&quot; id=&quot;search&quot; type=&quot;search&quot; placeholder=&quot;我是一个输入框&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><p><strong>监听搜索按钮：</strong> 通过键盘键值匹配监听用户点击搜索按钮</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&quot;search&quot;).addEventListener(&quot;keydown&quot;, function(e) &#123;</span><br><span class="line">    if (e.keyCode == &quot;13&quot;) &#123;</span><br><span class="line">        alert(&quot;成功调用搜索框啦~&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h3><p>部分手机在搜索框聚焦时，会出现下图所示的打叉样式：</p>
-<p><div align="center"><br>  <img width="350" src="../images/searchKey.jpg" alt="搜索框自带×样式" title="搜索框自带×样式"><br></div><br>可通过以下代码去除自带叉号样式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input::-webkit-search-cancel-button &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p><a href="https://gwjacqueline.github.io/returnKey/Index.html">我的 demo</a>,是不是已经成功禁用了呢？</p>
+<h2 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h2><h3 id="history-pushState-state-title-url"><a href="#history-pushState-state-title-url" class="headerlink" title="history.pushState(state, title[, url])"></a>history.pushState(state, title[, url])</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;pushState()是 H5 的 API 中新添加的方法，是实现物理键禁用的核心方法，所以先简单记录下该方法.</p>
+<blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;pushState()是在 history 栈中添加一个新的条目。通过 window.history 方法创建新的历史项。但是它只改变地址栏 url，不刷新页面。pushState()带有三个参数：一个状态对象 state，一个标题（目前没有用，可以传 null），以及一个可选的 URL 地址。和 pushState()用法以及参数一致的方法是 replaceState()。它和 pushState()的区别是：pushState()是在 history 栈中添加一个新的条目，而 replaceState()是替换当前的记录值。因为本篇文章没有用到 replaceState(），所以这里就不进行详细说明了。</p>
+</blockquote>
+<h3 id="popstate"><a href="#popstate" class="headerlink" title="popstate"></a>popstate</h3><blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当活动历史记录条目更改时，就会触发该事件。这样就可以帮助我们后面去监听用户点击返回的事件了。需要注意的是调用 history.pushState()或 history.replaceState() <strong>不会触发</strong> popstate 事件。当调用以上两个方法去替换新的历史项，popstate 事件的 state 属性会包含历史项状态对象的拷贝。只有在做出浏览器动作时，才会触发 popstate 事件，比如用户点击浏览器的前进回退按钮。这边经过测试，不同的浏览器在加载页面时处理 popstate 事件的形式存在差异，Chrome 和 Safari 通常会触发 popstate 事件，但 Firefox 则不会。</p>
+</blockquote>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;明白了以上两个核心方法后，就能很好的看懂禁用物理键返回的原理了。实际上就是：在监听到用户点击返回键时，在 history 栈中添加一个当前的地址。这样用户就怎么也返回不了啦~</p>
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const back = &#123;&#125;;</span><br><span class="line">back.onPopState = function () &#123;</span><br><span class="line">    back.record(&quot;back&quot;);</span><br><span class="line">&#125;;</span><br><span class="line">back.record = function (state) &#123;</span><br><span class="line">    history.pushState(state, null, location.href);</span><br><span class="line">&#125;</span><br><span class="line">back.init = function () &#123;</span><br><span class="line">    //每次监听到返回键，都使用pushState插入一条历史记录,popstate 事件的 state 属性会包含历史项状态对象的拷贝</span><br><span class="line">    window.addEventListener(&quot;popstate&quot;, back.onPopState);</span><br><span class="line">    // 在初始化的时候，先插入一条历史记录，避免用户按返回键</span><br><span class="line">    back.record(&quot;back&quot;);</span><br><span class="line">&#125;</span><br><span class="line">back.init();</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -237,7 +238,7 @@ var a = new Donate({
           </li>
           <li class="post-copyright-link">
           <strong>本文链接:  </strong>
-          <a href="/手机端调用搜索键盘/" target="_blank" title="手机端调用搜索键盘">https://gwjacqueline.github.io/手机端调用搜索键盘/</a>
+          <a href="/js如何禁用物理返回键/" target="_blank" title="js如何禁用物理返回键">https://gwjacqueline.github.io/js如何禁用物理返回键/</a>
           </li>
           <li class="post-copyright-license">
             <strong>版权声明:   </strong>
@@ -277,7 +278,7 @@ var a = new Donate({
       
       
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端/">移动端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/返回/">返回</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/物理返回键/">物理返回键</a></li></ul>
 
       
 
@@ -287,19 +288,10 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/js如何禁用物理返回键/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          js如何禁用物理返回键
-        
-      </div>
-    </a>
   
-  
-    <a href="/天花乱坠的数组方法(二)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/手机端调用搜索键盘/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">天花乱坠的数组方法(二)</div>
+      <div class="article-nav-title">手机端调用搜索键盘</div>
     </a>
   
 </nav>
@@ -313,7 +305,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Html"><span class="nav-number">1.</span> <span class="nav-text">Html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js"><span class="nav-number">2.</span> <span class="nav-text">js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化点"><span class="nav-number">3.</span> <span class="nav-text">优化点</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#效果展示"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心方法"><span class="nav-number">2.</span> <span class="nav-text">核心方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#history-pushState-state-title-url"><span class="nav-number">2.1.</span> <span class="nav-text">history.pushState(state, title[, url])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#popstate"><span class="nav-number">2.2.</span> <span class="nav-text">popstate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现原理"><span class="nav-number">3.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要代码"><span class="nav-number">4.</span> <span class="nav-text">主要代码</span></a></li></ol>
     
     </div>
   </aside>
