@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>generator生成器 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="ES6异步">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历器，我们每执行一次，函数的内部的状态就会发生一次改变。">
+<meta name="keywords" content="ES6,异步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="generator生成器">
+<meta property="og:url" content="https://gwjacqueline.github.io/generator生成器/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历器，我们每执行一次，函数的内部的状态就会发生一次改变。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-13T14:41:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="generator生成器">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历器，我们每执行一次，函数的内部的状态就会发生一次改变。">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-generator生成器" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      generator生成器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/generator生成器/" class="article-date">
+	  <time datetime="2019-04-13T11:31:01.000Z" itemprop="datePublished">2019-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历器，我们每执行一次，函数的内部的状态就会发生一次改变。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="定义及调用"><a href="#定义及调用" class="headerlink" title="定义及调用"></a>定义及调用</h2><h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function* gen() &#123;</span><br><span class="line">    yield &quot;Lucy&quot;;</span><br><span class="line">    yield &quot;DaMing&quot;;</span><br><span class="line">    return &quot;OK&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generator 在形态上与普通函数有两点区别：一是，function 和函数名之间有一个”*“号；二是，函数体内部使用 yield(产出)语句，定义函数内部不同的状态。<strong>yield</strong> 关键字用来暂停和继续一个生成器函数,我们可以在需要的时候控制函数的运行。yield 语句的特点是必须等上一条 yield 语句执行完毕才会执行下一条 yield 语句。这样的好处是可以帮助我们用同步的方式写异步代码。避免陷入回调地狱。</p>
+<h3 id="调用："><a href="#调用：" class="headerlink" title="调用："></a>调用：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(gen()); //gen &#123;&lt;suspended&gt;&#125;</span><br><span class="line">console.log(g1.next());  //&#123;value: &quot;Lucy&quot;, done: false&#125;</span><br><span class="line">console.log(g1.next());  //&#123;value: &quot;DaMing&quot;, done: false&#125;</span><br><span class="line">console.log(g1.next());  //&#123;value: &quot;OK&quot;, done: true&#125;</span><br><span class="line">console.log(g1.next());  //&#123;value: undefined, done: true&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，我们看到控制台将 gen()直接打印出来，是一个 Iterator 实例，然后我们再去执行 Iterator 实例的 next()方法，那么这个函数才开始真正运行，并把 yield 后面的值包装成固定对象的并返回，遇到 return 或者函数结束没有更多的值返回时,再返回 undefined。也就是函数在执行过程中的时候，如果没有遇到 return 语句或者没有 return 时，控制权无法交回被调用的代码。</p>
+<h2 id="返回多个值的函数"><a href="#返回多个值的函数" class="headerlink" title="返回多个值的函数"></a>返回多个值的函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回多个值有什么用？斐波那契数列就是一个很好的例子。接下来，我们分别用普通函数和 generator 生成器看下是怎么实现一个产生斐波那契数列的函数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;斐波那契数列：前两个值相加等于第三个值，再前面两个值相加等于后面的值（比如：0，1，1，2，3，5）</p>
+<p>普通函数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function fb(max) &#123;</span><br><span class="line">    let a = 0, b = 1, arr = [0, 1];</span><br><span class="line">    while (arr.length &lt; max) &#123;</span><br><span class="line">        [a, b] = [b, a + b];</span><br><span class="line">        arr.push(b);</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br><span class="line">console.log(fb(6)); //[0, 1, 1, 2, 3, 5]</span><br></pre></td></tr></table></figure>
+<p>generator:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function* fb(max) &#123;</span><br><span class="line">    let a = 0, b = 1, n = 0;</span><br><span class="line">    while (n &lt; max) &#123;</span><br><span class="line">        yield a;</span><br><span class="line">        [a, b] = [b, a + b];</span><br><span class="line">        n++;</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line">var f = fb(5);</span><br><span class="line">console.log(f.next()); //&#123;value: 0, done: false&#125;</span><br><span class="line">console.log(f.next()); //&#123;value: 1, done: false&#125;</span><br><span class="line">console.log(f.next()); //&#123;value: 1, done: false&#125;</span><br><span class="line">console.log(f.next()); //&#123;value: 2, done: false&#125;</span><br><span class="line">console.log(f.next()); //&#123;value: 3, done: false&#125;</span><br><span class="line">console.log(f.next()); //&#123;value: undefined, done: false&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以看到以上都是采用手动调用的方式，非常的麻烦，接下来我们看下怎么能够实现自动遍历。</p>
+<h2 id="自动遍历-generator"><a href="#自动遍历-generator" class="headerlink" title="自动遍历 generator"></a>自动遍历 generator</h2><h3 id="for-of"><a href="#for-of" class="headerlink" title="for..of"></a>for..of</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterate 是一个迭代器，只要是迭代器就可以循环输出，for…of 循环可以自动遍历 Generator 函数生成的 Iterator 对象。但是，return 的东西不会遍历，主要遍历 yield 的东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* gen() &#123;</span><br><span class="line">    yield &quot;Lucy&quot;;</span><br><span class="line">    yield &quot;DaMing&quot;;</span><br><span class="line">    return &quot;OK&quot;</span><br><span class="line">&#125;</span><br><span class="line">let g1 = gen();</span><br><span class="line">//for..of遍历</span><br><span class="line">for (var item of gen(3)) &#123;</span><br><span class="line">    console.log(item);  //Lucy,DaMing</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解构解的是 yield 的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function* gen() &#123;</span><br><span class="line">    yield &quot;Lucy&quot;;</span><br><span class="line">    yield &quot;DaMing&quot;;</span><br><span class="line">    return &quot;OK&quot;</span><br><span class="line">&#125;</span><br><span class="line">let g1 = gen();</span><br><span class="line">//解构赋值</span><br><span class="line">const [a, b, c] = gen();</span><br><span class="line">console.log(a, b, c);  //Lucy DaMing undefined</span><br><span class="line">const [x, ...y] = gen();</span><br><span class="line">console.log(x, y); //Lucy [&quot;DaMing&quot;]</span><br></pre></td></tr></table></figure>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还可以配合扩展运算符去使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function* gen() &#123;</span><br><span class="line">    yield &quot;Lucy&quot;;</span><br><span class="line">    yield &quot;DaMing&quot;;</span><br><span class="line">    return &quot;OK&quot;</span><br><span class="line">&#125;</span><br><span class="line">let g1 = gen();</span><br><span class="line">//扩展运算符</span><br><span class="line">console.log(...gen()); //Lucy DaMing</span><br></pre></td></tr></table></figure>
+<h2 id="结合-axios-数据请求"><a href="#结合-axios-数据请求" class="headerlink" title="结合 axios 数据请求"></a>结合 axios 数据请求</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generator 在实际应用中往往需要配合 promise 去使用，接下来我们写个实例，看看它是怎么用的。这里会用到 axios，用法这边就不详细说了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//引入axios</span><br><span class="line">&lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">function* gener() &#123;</span><br><span class="line">    let username = yield &quot;GWJacqueline&quot;;</span><br><span class="line">    //获取个人信息</span><br><span class="line">    yield axios.get(`https://api.github.com/users/$&#123;username&#125;`);</span><br><span class="line">&#125;</span><br><span class="line">let genera = gener();</span><br><span class="line">//先将username包装成固定对象的并返回</span><br><span class="line">console.log(genera.next().value);  //GWJacqueline</span><br><span class="line">//获取信息</span><br><span class="line">var backname = genera.next().value.then((res) =&gt; &#123;</span><br><span class="line">    console.log(res.data);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(backname);  //&#123;login: &quot;undefined&quot;, id: 11791361, node_id: &quot;MDQ6VXNlcjExNzkxMzYx&quot;, avatar_url: &quot;https://avatars3.githubusercontent.com/u/11791361?v=4&quot;, gravatar_id: &quot;&quot;, …&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的例子主要的通过 generator 去获取 github 上面有关于我的一些信息。</p>
+<h2 id="实例：同学录"><a href="#实例：同学录" class="headerlink" title="实例：同学录"></a>实例：同学录</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后，我分别使用 generator 和迭代器实现了一个”同学录浏览功能“，可以点击<a href="https://gwjacqueline.github.io/alumni-book/Index.html">同学录</a>查看具体效果。<br>迭代器主要代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function showMessage(msg) &#123;</span><br><span class="line">    let nextIndex = 0;</span><br><span class="line">    return &#123;</span><br><span class="line">        next() &#123;</span><br><span class="line">            return nextIndex &lt; msg.length ?</span><br><span class="line">                &#123; value: msg[nextIndex++], done: false &#125; :</span><br><span class="line">                &#123; value: undefined, done: true &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>generator 主要代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function* showMessage() &#123;</span><br><span class="line">    yield data[0];</span><br><span class="line">    yield data[1];</span><br><span class="line">    yield data[2];</span><br><span class="line">    yield data[3];</span><br><span class="line">    yield data[4];</span><br><span class="line">&#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对比完两种方式，明显 generator 比迭代器实现的更加优雅，完整代码可以上我的<a href="https://github.com/GWJacqueline/alumni-book" target="_blank" rel="noopener">github</a>查看;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/generator生成器/" target="_blank" title="generator生成器">https://gwjacqueline.github.io/generator生成器/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步/">异步</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/js如何禁用物理返回键/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">js如何禁用物理返回键</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义及调用"><span class="nav-number">1.</span> <span class="nav-text">定义及调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义："><span class="nav-number">1.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用："><span class="nav-number">1.2.</span> <span class="nav-text">调用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回多个值的函数"><span class="nav-number">2.</span> <span class="nav-text">返回多个值的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动遍历-generator"><span class="nav-number">3.</span> <span class="nav-text">自动遍历 generator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for-of"><span class="nav-number">3.1.</span> <span class="nav-text">for..of</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解构赋值"><span class="nav-number">3.2.</span> <span class="nav-text">解构赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展运算符"><span class="nav-number">3.3.</span> <span class="nav-text">扩展运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合-axios-数据请求"><span class="nav-number">4.</span> <span class="nav-text">结合 axios 数据请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例：同学录"><span class="nav-number">5.</span> <span class="nav-text">实例：同学录</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
