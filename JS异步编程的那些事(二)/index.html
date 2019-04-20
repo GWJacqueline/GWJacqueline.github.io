@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>js异步编程的那些事(二) | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="ES6ES7异步MLHttpRequestpromisefetch">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章说完了 Promise 对象、fetch 方法。这篇我们接着说说 ES7 中丢出的语法糖，”异步终极解决方法 Async/await“。以及分别用 fetch 和 Async/await 去封装一个增删改查的库。">
+<meta name="keywords" content="ES6,ES7,异步,MLHttpRequest,promise,fetch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS异步编程的那些事(二)">
+<meta property="og:url" content="https://gwjacqueline.github.io/JS异步编程的那些事(二)/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章说完了 Promise 对象、fetch 方法。这篇我们接着说说 ES7 中丢出的语法糖，”异步终极解决方法 Async/await“。以及分别用 fetch 和 Async/await 去封装一个增删改查的库。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-20T09:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS异步编程的那些事(二)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;上篇文章说完了 Promise 对象、fetch 方法。这篇我们接着说说 ES7 中丢出的语法糖，”异步终极解决方法 Async/await“。以及分别用 fetch 和 Async/await 去封装一个增删改查的库。">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-JS异步编程的那些事(二)" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      JS异步编程的那些事(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/JS异步编程的那些事(二)/" class="article-date">
+	  <time datetime="2019-04-20T07:30:26.000Z" itemprop="datePublished">2019-04-20</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上篇文章说完了 Promise 对象、fetch 方法。这篇我们接着说说 ES7 中丢出的语法糖，”异步终极解决方法 Async/await“。以及分别用 fetch 和 Async/await 去封装一个增删改查的库。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Async-await"><a href="#Async-await" class="headerlink" title="Async/await"></a>Async/await</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async 和 await 是 js 中异步最终极的解决方案。可以很舒适地与 promise 协同工作。但兼容一般，我们可以用 polyfill(js 修补器)兼容一下，polyfill 是一个 js 库、专门用于处理 js 的兼容性问题。但是确实很难做到 100%覆盖。我们先来看看 async 的用法。</p>
+<h3 id="Async-await-用法"><a href="#Async-await-用法" class="headerlink" title="Async/await 用法"></a>Async/await 用法</h3><p>显而易见这是一个普通到不行的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function myFunc() &#123;</span><br><span class="line">    return &quot;Hello world&quot;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(myFunc()); //Hello world</span><br></pre></td></tr></table></figure>
+<p>我们来看看加了 async 之后呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">async function myAsync() &#123;</span><br><span class="line">    return &quot;Hello world&quot;</span><br><span class="line">&#125;</span><br><span class="line">console.log(myAsync());  //Promise &#123;&lt;resolved&gt;: &quot;Hello world&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看到了吗？在函数前面加了 async(异步) 关键字，就表示该函数是异步函数。这个函数就会返回一个 Promise，且代码中有 return 语句非 Promise 语句时，JS 就会自动的把 return 中的”Hello world“包装成 Promise 的 resolved 值。语法是不是敲极的简单呢？接下来我们看看 await 是如何搭配 Async 一起使用的呢。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">async function asyncWait() &#123;</span><br><span class="line">    const pro = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123; resolve(&quot;hello world&quot;) &#125;, 2000);</span><br><span class="line">    &#125;);</span><br><span class="line">    const error = false;</span><br><span class="line">    if (error) &#123;</span><br><span class="line">        await Promise.reject(new Error(&quot;报错了&quot;));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //等待pro执行完毕后才会执行</span><br><span class="line">        const res = await pro;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">asyncWait().then((data) =&gt; &#123;</span><br><span class="line">    console.log(data);  //Hello world</span><br><span class="line">&#125;).catch((err) =&gt; &#123;</span><br><span class="line">    console.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们在 async 声明的函数体内，使用了 await 关键字。当函数执行的时候，一旦遇到 await 就会先返回，等到异步操作完成之后，再去执行函数体内后面的语句。这里要注意的是:<strong>不能在常规函数里使用 await,否则会出现语法错误</strong>。await 和 async 就好比一对连体婴。await 只能在 async 函数中工作。我们来看看如果不使用 await 会有什么效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function please() &#123;</span><br><span class="line">    const response = fetch(&quot;http://jsonplaceholder.typicode.com/posts&quot;);</span><br><span class="line">    const data = response.json();  //response.json is not a function</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br><span class="line">please().then(data =&gt; console.log(data));</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上代码控制台中报错：<em>response.json is not a function</em>。我们看到没有在 await,下面的 response.json()就会报错，因为 response 还没有执行完。如果加了 await，就会在当前请求成功后再往下走。await 表示等一下，只有当 await 定义的行数执行完毕后代码才会继续往下执行。大多情况下 await 后面的应该跟一个 Promise 的对象或者 fetch。我们看看加了 await 关键词后的执行效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function please() &#123;</span><br><span class="line">    const response = await fetch(&quot;http://jsonplaceholder.typicode.com/posts&quot;);</span><br><span class="line">    const data = await response.json();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br><span class="line">please().then(data =&gt; console.log(data)); (100) [&#123;…&#125;, &#123;…&#125;,...]</span><br></pre></td></tr></table></figure>
+<h2 id="封装增删改查方法"><a href="#封装增删改查方法" class="headerlink" title="封装增删改查方法"></a>封装增删改查方法</h2><h3 id="fetch-库"><a href="#fetch-库" class="headerlink" title="fetch 库"></a>fetch 库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;完整的代码已经上传到我的<a href="https://github.com/GWJacqueline/fetch-demo" target="_blank" rel="noopener">github 仓库</a>。以下将记录 fetch 封装增删改查的关键代码。</p>
+<h4 id="查看数据"><a href="#查看数据" class="headerlink" title="查看数据"></a>查看数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class EasyHttp &#123;</span><br><span class="line">    get(url) &#123;</span><br><span class="line">        return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">            fetch(url)</span><br><span class="line">                .then((res) =&gt; res.json())</span><br><span class="line">                .then((data) =&gt; &#123; resolve(data) &#125;)</span><br><span class="line">                .catch(err =&gt; &#123; reject(err) &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//调用方式</span><br><span class="line">const http = new EasyHttp;</span><br><span class="line">http.get(&quot;data/test.json&quot;)</span><br><span class="line">    .then((data) =&gt; &#123;</span><br><span class="line">        console.log(data);  //(6) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch((err) =&gt; &#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">post(url, data) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        fetch(url, &#123;</span><br><span class="line">            //发送请求方法,一般用大写</span><br><span class="line">            method: &apos;POST&apos;,</span><br><span class="line">            //http的头信息</span><br><span class="line">            headers: &#123;</span><br><span class="line">                &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line">            &#125;,</span><br><span class="line">            //请求体,将对象转成字符串</span><br><span class="line">            body: JSON.stringify(data)</span><br><span class="line">        &#125;)</span><br><span class="line">            .then(res =&gt; res.json())</span><br><span class="line">            .then(data =&gt; resolve(data))</span><br><span class="line">            .catch(err =&gt; reject(err))</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">put(url, data) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        fetch(url, &#123;</span><br><span class="line">            method: &apos;PUT&apos;,</span><br><span class="line">            headers: &#123;</span><br><span class="line">                &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line">            &#125;,</span><br><span class="line">            body: JSON.stringify(data)</span><br><span class="line">        &#125;).then(res =&gt; res.json())</span><br><span class="line">            .then(data =&gt; resolve(data))</span><br><span class="line">            .catch(err =&gt; reject(err))</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">delete(url) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        fetch(url, &#123;</span><br><span class="line">            method: &apos;DELETE&apos;,</span><br><span class="line">            headers: &#123;</span><br><span class="line">                &apos;Content-type&apos;: &apos;application/json&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).then(res =&gt; res.json())</span><br><span class="line">            .then(data =&gt; resolve(&quot;删除成功&quot;))</span><br><span class="line">            .catch(err =&gt; reject(err));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看完了 fetch 的写法，接下来我们看看如何用 async/await 如何更优雅的实现。</p>
+<h3 id="async-await-封装"><a href="#async-await-封装" class="headerlink" title="async/await 封装"></a>async/await 封装</h3><h4 id="查看数据-1"><a href="#查看数据-1" class="headerlink" title="查看数据"></a>查看数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async get(url) &#123;</span><br><span class="line">    const response = await fetch(url);</span><br><span class="line">    //将Promise对象转成json对象</span><br><span class="line">    const data = await response.json();</span><br><span class="line">    return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="增加数据-1"><a href="#增加数据-1" class="headerlink" title="增加数据"></a>增加数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">async post(url, data) &#123;</span><br><span class="line">    const response = await fetch(url, &#123;</span><br><span class="line">        method: &apos;POST&apos;,</span><br><span class="line">        headers: &#123;</span><br><span class="line">            &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        body: JSON.stringify(data)</span><br><span class="line">    &#125;);</span><br><span class="line">    const postData = await response.json();</span><br><span class="line">    return postData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="修改数据-1"><a href="#修改数据-1" class="headerlink" title="修改数据"></a>修改数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">async put(url, data) &#123;</span><br><span class="line">    const response = await fetch(url, &#123;</span><br><span class="line">        method: &apos;PUT&apos;,</span><br><span class="line">        headers: &#123;</span><br><span class="line">            &apos;content-type&apos;: &apos;application/json&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        body: JSON.stringify(data)</span><br><span class="line">    &#125;);</span><br><span class="line">    const putData = await response.json();</span><br><span class="line">    return putData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据-1"><a href="#删除数据-1" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">async delete(url) &#123;</span><br><span class="line">    const response = await fetch(url, &#123;</span><br><span class="line">        method: &apos;DELETE&apos;,</span><br><span class="line">        headers: &#123;</span><br><span class="line">            &apos;Content-type&apos;: &apos;application/json&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    const deleteData = await &quot;成功删除数据&quot;;</span><br><span class="line">    return deleteData;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从代码量上，我们可以显而易见的对比出 async/await 代码量明显少很多，我们不再需要书写 Promise 了。也不需要那么多的.then.then,代码看上去更加优雅，编写出的异步代码更易于读写。只要加一个 async，一个函数就可以作为 promise 对象返回回去 ,等待 resolve 执行完毕后，再去实行。让我们书写异步代码的时候像同步的方式一样舒畅。用 async/await 编写的异步代码更简单易懂，从视觉上就能感觉到复杂度降低了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/JS异步编程的那些事(二)/" target="_blank" title="JS异步编程的那些事(二)">https://gwjacqueline.github.io/JS异步编程的那些事(二)/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES7/">ES7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MLHttpRequest/">MLHttpRequest</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fetch/">fetch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步/">异步</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/JS异步编程的那些事(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JS异步编程的那些事(一)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Async-await"><span class="nav-number">1.</span> <span class="nav-text">Async/await</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Async-await-用法"><span class="nav-number">1.1.</span> <span class="nav-text">Async/await 用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装增删改查方法"><span class="nav-number">2.</span> <span class="nav-text">封装增删改查方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fetch-库"><span class="nav-number">2.1.</span> <span class="nav-text">fetch 库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看数据"><span class="nav-number">2.1.1.</span> <span class="nav-text">查看数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加数据"><span class="nav-number">2.1.2.</span> <span class="nav-text">增加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据"><span class="nav-number">2.1.3.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据"><span class="nav-number">2.1.4.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await-封装"><span class="nav-number">2.2.</span> <span class="nav-text">async/await 封装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看数据-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">查看数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加数据-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">增加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">删除数据</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
