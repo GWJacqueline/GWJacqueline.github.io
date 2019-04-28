@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>js/jq封装插件的套路 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="面向对象原型链继承">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我们小组这周分享了有关于“js 插件封装的方法”。颇有心得，就记录整理出了一套封装插件的固定模板公式，简称套路，百试百灵。">
+<meta name="keywords" content="面向对象,原型链,继承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js&#x2F;jq封装插件的套路">
+<meta property="og:url" content="https://gwjacqueline.github.io/js-jq封装插件的套路/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我们小组这周分享了有关于“js 插件封装的方法”。颇有心得，就记录整理出了一套封装插件的固定模板公式，简称套路，百试百灵。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-27T09:57:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js&#x2F;jq封装插件的套路">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我们小组这周分享了有关于“js 插件封装的方法”。颇有心得，就记录整理出了一套封装插件的固定模板公式，简称套路，百试百灵。">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-js-jq封装插件的套路" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      js/jq封装插件的套路
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/js-jq封装插件的套路/" class="article-date">
+	  <time datetime="2019-04-26T07:05:38.000Z" itemprop="datePublished">2019-04-26</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a><a class="article-category-link" href="/categories/js/jq/">jq</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们小组这周分享了有关于“js 插件封装的方法”。颇有心得，就记录整理出了一套封装插件的固定模板公式，简称套路，百试百灵。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="好插件"><a href="#好插件" class="headerlink" title="好插件"></a>好插件</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，我们先来说说怎么样封装插件，才叫一个好插件。它需要满足以下几点：</p>
+<blockquote>
+<p>1.代码能够很好的复用<br>2.插件自身的作用域要与用户当前的作用域相互独立，避免各个相同功能组件的干扰<br>3.插件有默认参数且支持使用者修改<br>4.需提供针对事件的监听接口，便于使用者使用<br>5.支持链式调用<br>6.便于维护</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说完了一个好插件应该具备的条件，接下来我们通过 js 和 jquery 两种方式通过实现简单加减乘除的运算来总结一下插件封装的套路把。</p>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="插件最外层"><a href="#插件最外层" class="headerlink" title="插件最外层"></a>插件最外层</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;(function (global, undefined) &#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">&#125;)(this)</span><br></pre></td></tr></table></figure>
+<p>1.在最前面加了” <strong>;</strong> “是为了防止跟其他 js 压缩时报错。<br> 2.因为 JS 变量的调用，从全局作用域上查找速度会比私有作用域里慢的多，所以我们需要用闭包的方式。封装的时候把 js 代码放到一个自执行函数里，不仅可以延长插件内部变量的生命周期，让插件可以重复调用，还可以防止变量冲突。<br> 3.使用严格模式，它是一种特殊的执行模式，可以修复部分语言上的不足，提供更强的错误检查，并增强安全性。<br>4.undefined 是为了兼容较老的浏览器。<br>最后传 this，而不是 window 或者 global，是因为不确定我们的兼容浏览器端和非浏览器端。直接取全局变量 this 作为局部变量使用，可缩短访问时间。</p>
+<h3 id="创建构造函数并初始化变量"><a href="#创建构造函数并初始化变量" class="headerlink" title="创建构造函数并初始化变量"></a>创建构造函数并初始化变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">;(function (global, undefined) &#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    //定义一个类，通常首字母大写</span><br><span class="line">    var Cal = function (options) &#123;</span><br><span class="line">        //传参</span><br><span class="line">        this.options = $.extend(&#123;&#125;, Cal.DEFAULTS, options || &#123;&#125;);</span><br><span class="line">        //在初始化执行一些操作</span><br><span class="line">        this.init();</span><br><span class="line">    &#125;;</span><br><span class="line">    //默认参数列表</span><br><span class="line">    Cal.DEFAULTS = &#123;</span><br><span class="line">        x: 1,</span><br><span class="line">        y: 2</span><br><span class="line">    &#125;;</span><br><span class="line">    //把这个函数暴露给外部，以便全局调用</span><br><span class="line">    global.Cal = Cal;</span><br><span class="line">&#125;)(this)</span><br></pre></td></tr></table></figure>
+<p>1.利用 <strong>\$ .extend</strong> 用来合并默认参数和用户传进来的参数</p>
+<blockquote>
+<p>\$.extend( [deep ], target, object1 [, objectN ] )<br><br>deep:可选，默认为 false.如果该值为 true，且多个对象的某个同名属性也都是对象，则该”属性对象”的属性也将进行合并<br><br>target:Object 类型 目标对象，其他对象的成员属性将被附加到该对象上。<br><br>object1:可选。Object 类型 第一个被合并的对象。<br><br>objectN:可选。Object 类型 第 N 个被合并的对象。<br></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var item1 = &#123;</span><br><span class="line">    name: &quot;Lili&quot;,</span><br><span class="line">    age: 14,</span><br><span class="line">    sex: &quot;girl&quot;,</span><br><span class="line">    address: &#123; pro: &quot;cc&quot; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var item2 = &#123;</span><br><span class="line">    name: &quot;Lucy&quot;,</span><br><span class="line">    age: 18,</span><br><span class="line">    address: &#123; pro: &quot;zh&quot;, city: &quot;x&quot; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">//默认为false</span><br><span class="line">var result = $.extend(false,item2, item1);</span><br><span class="line">var resultTrue = $.extend(true, &#123;&#125;, item2, item1);</span><br><span class="line">console.log(result); //&#123;name: &quot;Lili&quot;, age: 14, sex: &quot;girl&quot;,address: &#123;pro: &quot;cc&quot;&#125;&#125;</span><br><span class="line">console.log(resultTrue); //&#123;name: &quot;Lili&quot;, age: 14, sex: &quot;girl&quot;, address: &#123;pro: &quot;zh&quot;, city: &quot;x&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>2.插件的定义和执行都在闭包中，所以他们的作用域也就是这个闭包函数，只有绑定到全局对象上，我们才可以调用。</p>
+<h3 id="利用原型链"><a href="#利用原型链" class="headerlink" title="利用原型链"></a>利用原型链</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//原型链上提供方法</span><br><span class="line">Cal.prototype = &#123;</span><br><span class="line">    //定义方法</span><br><span class="line">    init() &#123;</span><br><span class="line">        console.log(`你输入的两个参数分别为$&#123;this.options.x&#125;,$&#123;this.options.y&#125;`);</span><br><span class="line">    &#125;,</span><br><span class="line">    add() &#123;</span><br><span class="line">        return `计算结果为$&#123;this.options.x + this.options.y&#125;`</span><br><span class="line">    &#125;,</span><br><span class="line">    sub() &#123;</span><br><span class="line">        return `计算结果为$&#123;this.options.x - this.options.y&#125;`</span><br><span class="line">    &#125;,</span><br><span class="line">    rid() &#123;</span><br><span class="line">        return `计算结果为$&#123;this.options.x * this.options.y&#125;`</span><br><span class="line">    &#125;,</span><br><span class="line">    div() &#123;</span><br><span class="line">        return `计算结果为$&#123;this.options.x / this.options.y&#125;`</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 js 中，所有对象都是继承自原型的，所以对象都有一个<em>proto</em>的内置属性用于指向创建它的函数对象的原型对象 prototype。有关与原型链和继承的问题，可以看看之前的<a href="https://gwjacqueline.github.io/重温OOP之原型链与继承/">文章</a>。一般我们都将方法写在原型里，将属性写在构造函数里。因为方法写在原型中比写在构造函数中消耗的内存更小，因为在内存中一个类的原型只有一个，写在原型中的行为可以被所有实例共享，实例化的时候并不会在实例的内存中再复制一份。而写在类中的方法，实例化的时候会在每个实例中再复制一份，所以消耗的内存更高。</p>
+<h3 id="兼容多种模块规范"><a href="#兼容多种模块规范" class="headerlink" title="兼容多种模块规范"></a>兼容多种模块规范</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//兼容CommonJs规范</span><br><span class="line">if (typeof module !== &apos;undefined&apos; &amp;&amp; module.exports) &#123;</span><br><span class="line">    module.exports = Cal;</span><br><span class="line">&#125;;</span><br><span class="line">//兼容AMD/CMD规范</span><br><span class="line">if (typeof define === &apos;function&apos;) define(function () &#123;</span><br><span class="line">    return Cal;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="完整套路"><a href="#完整套路" class="headerlink" title="完整套路"></a>完整套路</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">;(function (global, undefined) &#123;</span><br><span class="line">    //使用严格模式</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    //创建一个构造函数</span><br><span class="line">    var X = function (options) &#123;</span><br><span class="line">        //合并参数</span><br><span class="line">        this.options = $.extend(&#123;&#125;, X.DEFAULTS, options || &#123;&#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">    X.DEFAULTS = &#123;</span><br><span class="line">        //默认参数</span><br><span class="line">    &#125;;</span><br><span class="line">    //原型链上提供方法</span><br><span class="line">    X.prototype = &#123;</span><br><span class="line">        //定义方法</span><br><span class="line">    &#125;;</span><br><span class="line">    //兼容CommonJs规范</span><br><span class="line">    if (typeof module !== &apos;undefined&apos; &amp;&amp; module.exports) &#123;</span><br><span class="line">        module.exports = X;</span><br><span class="line">    &#125;;</span><br><span class="line">    //兼容AMD/CMD规范</span><br><span class="line">    if (typeof define === &apos;function&apos;) define(function () &#123;</span><br><span class="line">        return X;</span><br><span class="line">    &#125;);</span><br><span class="line">    //暴露给外部</span><br><span class="line">    global.X = X;</span><br><span class="line">&#125;)(this)</span><br><span class="line">//调用</span><br><span class="line">new X(&#123;</span><br><span class="line">    //参数</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="改写-ES6"><a href="#改写-ES6" class="headerlink" title="改写 ES6"></a>改写 ES6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">(function (global, undefined) &#123;</span><br><span class="line">    //检测传入的参数类型是否为对象，若不是则抛出错误</span><br><span class="line">    if (arguments.length &gt; 0 &amp;&amp; (typeof options).toLowerCase() !== &apos;object&apos;) &#123;</span><br><span class="line">        throw new TypeError(options + &apos;is not a Object&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">    //定义了一个名字为Cal的类</span><br><span class="line">    class Cal &#123;</span><br><span class="line">        //constructor是一个构造方法，用来接收参数</span><br><span class="line">        constructor(options) &#123;</span><br><span class="line">            //传入参数覆盖默认值</span><br><span class="line">            //this代表的是实例对象</span><br><span class="line">            this.options = Object.assign(&#123;</span><br><span class="line">                x: 1,</span><br><span class="line">                y: 2</span><br><span class="line">            &#125;, options);</span><br><span class="line">            this.init();</span><br><span class="line">        &#125;</span><br><span class="line">        //这是一个类的方法，注意千万不要加上function</span><br><span class="line">        init() &#123;</span><br><span class="line">            console.log(`你输入的两个参数分别为$&#123;this.options.x&#125;,$&#123;this.options.y&#125;`);</span><br><span class="line">        &#125;</span><br><span class="line">        //方法之间不要用逗号分隔，否则会报错</span><br><span class="line">        add() &#123;</span><br><span class="line">            return `计算结果为$&#123;this.options.x + this.options.y&#125;`</span><br><span class="line">        &#125;</span><br><span class="line">        sub() &#123;</span><br><span class="line">            return `计算结果为$&#123;this.options.x - this.options.y&#125;`</span><br><span class="line">        &#125;</span><br><span class="line">        rid() &#123;</span><br><span class="line">            return `计算结果为$&#123;this.options.x * this.options.y&#125;`</span><br><span class="line">        &#125;</span><br><span class="line">        div() &#123;</span><br><span class="line">            return `计算结果为$&#123;this.options.x / this.options.y&#125;`</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    global.Cal = Cal;</span><br><span class="line">&#125;)(this);</span><br><span class="line">var t = new Cal(&#123;</span><br><span class="line">    x: 5,</span><br><span class="line">    y: 6</span><br><span class="line">&#125;);</span><br><span class="line">console.log(t.add());  //计算结果为11</span><br><span class="line">console.log(t.sub());  //计算结果为-1</span><br><span class="line">console.log(t.rid());  //计算结果为30</span><br><span class="line">console.log(t.div());  //计算结果为0.8333333333333334</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;明显看出，ES6 中新引入了 class 关键字可以定义类。相比于 ES5，不仅代码量少了很多，写法上也更加清晰，更像是一种面向对象的语言。类自身指向的就是构造函数，所以我们可以当 class 其实是构造函数的另外一种写法。constructor 方法是类的构造函数的默认方法，当我们通过 new 生成对象实例时，会自动调用该方法。如果 construtor 方法没有显示定义，会隐式生成一个 constructor 方法且默认返回实例对象 this。constructor 中定义的属性为实例属性，也就是定义在 this 对象上的。constructor 外声明的属性是定义的原型上的。这里在书写的时候要注意两点：<strong>1.写一个类的方法，注意不要加上 function2.方法之间不要用逗号分隔</strong></p>
+<h2 id="JQ"><a href="#JQ" class="headerlink" title="JQ"></a>JQ</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 接下来我们通过 jQ 的两种使用方法 jQuery.function() 和 jQuery(“selector”)来看看如何用 jq 封装插件。</p>
+<h3 id="jQuery-fn"><a href="#jQuery-fn" class="headerlink" title="jQuery.fn"></a>jQuery.fn</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//利用闭包创建一个自执行的函数</span><br><span class="line">(function ($) &#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    function Cal(element, options) &#123;</span><br><span class="line">        this.$element = $(element);</span><br><span class="line">        this.options = $.extend(&#123;&#125;, Cal.DEFAULTS, options || &#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    function Plugin(option) &#123;</span><br><span class="line">        var args = Array.prototype.slice.call(arguments, 1);</span><br><span class="line">        //链式调用</span><br><span class="line">        return this.each(function () &#123;</span><br><span class="line">            //单例模式</span><br><span class="line">            var $this = $(this),</span><br><span class="line">                cal = $this.data(&apos;cal&apos;);</span><br><span class="line"></span><br><span class="line">            if (!cal) &#123;</span><br><span class="line">                $this.data(&apos;cal&apos;, (cal = new Cal(this, option)));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (typeof option == &apos;string&apos;) &#123;</span><br><span class="line">                cal[option] &amp;&amp; cal[option].apply(cal, args);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    $.fn.Cal = Plugin;</span><br><span class="line">&#125;)(jquery);</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上我们将之前写的 JS 插件改写成了 jquery 的形式。通过运用面向对象的思维方式，在 jquery 的原型上扩展方法。<br><br><strong>1.链式调用：</strong><br><br>return.this:返回当前对象，来维护插件的链式调用<br><br>.each: 循环实现每个元素的访问<br><br><strong>2.单例模式</strong><br><br>利用 data 来存放插件对象的实例，如果实例存在，则不再重新创建</p>
+<h4 id="完整套路-1"><a href="#完整套路-1" class="headerlink" title="完整套路"></a>完整套路</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//利用闭包创建一个自执行的函数</span><br><span class="line">(function () &#123;</span><br><span class="line">    //使用严格模式</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    //定义一个类</span><br><span class="line">    function X(element, options) &#123;</span><br><span class="line">        this.$element = $(element);</span><br><span class="line">        this.options = $.extend(&#123;&#125;, Cal.DEFAULTS, options || &#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    X.DEFAULTS = &#123;</span><br><span class="line">        //默认参数</span><br><span class="line">    &#125;;</span><br><span class="line">    //原型链上提供方法</span><br><span class="line">    X.prototype = &#123;</span><br><span class="line">        //定义方法</span><br><span class="line">    &#125;;</span><br><span class="line">    function Plugin(option) &#123;</span><br><span class="line">        var args = Array.prototype.slice.call(arguments, 1);</span><br><span class="line">        //链式调用</span><br><span class="line">        return this.each(function () &#123;</span><br><span class="line">            //单例模式</span><br><span class="line">            var $this = $(this),</span><br><span class="line">                x = $this.data(&apos;x&apos;);</span><br><span class="line"></span><br><span class="line">            if (!x) &#123;</span><br><span class="line">                $this.data(&apos;x&apos;, (x = new X(this, option)));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (typeof option == &apos;string&apos;) &#123;</span><br><span class="line">                x[option] &amp;&amp; x[option].apply(x, args);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    $.fn.X = Plugin;</span><br><span class="line">&#125;)();</span><br><span class="line">//调用插件</span><br><span class="line">$(&quot;selector&quot;).X();</span><br></pre></td></tr></table></figure>
+<h3 id="jQuery-extend"><a href="#jQuery-extend" class="headerlink" title="jQuery.extend()"></a>jQuery.extend()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.extend(&#123;</span><br><span class="line">    x: function () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">//调用方式</span><br><span class="line">$.x();</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery.extend()在上面已经详细说了用法。这种一般是为扩展 jQuery 类本身，为类添加新的方法，所以不需要生成实例，可以直接通过\$符号调用。一般很少用这种方式封装插件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/js-jq封装插件的套路/" target="_blank" title="js/jq封装插件的套路">https://gwjacqueline.github.io/js-jq封装插件的套路/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型链/">原型链</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/移动端常见兼容性问题(二)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">移动端常见兼容性问题(二)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#好插件"><span class="nav-number">1.</span> <span class="nav-text">好插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS"><span class="nav-number">2.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件最外层"><span class="nav-number">2.1.</span> <span class="nav-text">插件最外层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建构造函数并初始化变量"><span class="nav-number">2.2.</span> <span class="nav-text">创建构造函数并初始化变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用原型链"><span class="nav-number">2.3.</span> <span class="nav-text">利用原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容多种模块规范"><span class="nav-number">2.4.</span> <span class="nav-text">兼容多种模块规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整套路"><span class="nav-number">2.5.</span> <span class="nav-text">完整套路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改写-ES6"><span class="nav-number">2.6.</span> <span class="nav-text">改写 ES6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JQ"><span class="nav-number">3.</span> <span class="nav-text">JQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery-fn"><span class="nav-number">3.1.</span> <span class="nav-text">jQuery.fn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完整套路-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">完整套路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery-extend"><span class="nav-number">3.2.</span> <span class="nav-text">jQuery.extend()</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
