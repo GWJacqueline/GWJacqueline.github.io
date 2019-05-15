@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>vue实例生命周期 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JS框架渐进式">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Vue 是一个渐进式的 JS 框架，也就是一个没有太多限制的 JS 框架。和 Angular 相比，Vue 比 Angular 轻。Angular 是一个很重的框架，它给我们提供了一整套解决方案，Angular 就不是一个渐进式的框架，因为它有很多限制，就是用它的框架可以，但是必须要遵守它的规则，比如要使用它的组件机制，要使">
+<meta name="keywords" content="JS框架,渐进式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue实例生命周期">
+<meta property="og:url" content="https://gwjacqueline.github.io/Vue实例生命周期/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Vue 是一个渐进式的 JS 框架，也就是一个没有太多限制的 JS 框架。和 Angular 相比，Vue 比 Angular 轻。Angular 是一个很重的框架，它给我们提供了一整套解决方案，Angular 就不是一个渐进式的框架，因为它有很多限制，就是用它的框架可以，但是必须要遵守它的规则，比如要使用它的组件机制，要使">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gwjacqueline.github.io/images/lifecycle.png">
+<meta property="og:updated_time" content="2019-05-15T02:33:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue实例生命周期">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Vue 是一个渐进式的 JS 框架，也就是一个没有太多限制的 JS 框架。和 Angular 相比，Vue 比 Angular 轻。Angular 是一个很重的框架，它给我们提供了一整套解决方案，Angular 就不是一个渐进式的框架，因为它有很多限制，就是用它的框架可以，但是必须要遵守它的规则，比如要使用它的组件机制，要使">
+<meta name="twitter:image" content="https://gwjacqueline.github.io/images/lifecycle.png">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Vue实例生命周期" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Vue实例生命周期
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/Vue实例生命周期/" class="article-date">
+	  <time datetime="2019-05-14T02:37:54.000Z" itemprop="datePublished">2019-05-14</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vue 是一个渐进式的 JS 框架，也就是一个没有太多限制的 JS 框架。和 Angular 相比，Vue 比 Angular 轻。Angular 是一个很重的框架，它给我们提供了一整套解决方案，Angular 就不是一个渐进式的框架，因为它有很多限制，就是用它的框架可以，但是必须要遵守它的规则，比如要使用它的组件机制，要使用对应的依赖注入，要使用对应它给我集成的东西。虽然可以集成第三方的东西，但是还是有一定的排他性，不太和其他的东西融合。Vue 和 Angular 相反，你可以使用我框架的同时去使用其他的库或者框架。都能很好的跟它们去集成起来。一些简单的语法可以去<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">Vue 的官网</a>学习。这篇文章主要是详细记录下 Vue 实例的生命周期。如果我们只是知道 Vue 的简单语法，可以去实现一些简单的项目。但是一旦发生问题是，我们就需要借助生命周期去寻找问题，甚至一些需求我们也可以根据生命周期的情况去定该把这个东西写在哪里，所以理解生命周期可以帮助我们：<strong>1.找错误</strong>，<strong>2.解决需求</strong>。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="生命周期图解"><a href="#生命周期图解" class="headerlink" title="生命周期图解"></a>生命周期图解</h2><blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;nbsp 我们根据<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">Vue 的官网</a>给我们提供生命周期图示，来理解下实例的生命周期吧。</p>
+</blockquote>
+<div align="center"><br>  <img width="650" src="../images/lifecycle.png" alt="生命周期图示" title="生命周期图示"><br></div>
+
+<h3 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 红框部分就是生命周期中涉及到的钩子函数，比如 beforeCreate，created 等等到 destoryed.其实我们真正能用到的也就几个，但是 Vue 给我们提供的方法有很多，我们等会具体说。</p>
+<h4 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate()"></a>beforeCreate()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当我们实例 Vue()对象，在这个对象还没有创建之前，我们就会拥有一个方法叫 beforeCreate。如果还没有将 Vue 对象创建出来，我们就可以调用这个方法。这个时候，它只对你当前的事件做了一些配置，还没有真正去识别属性里的东西。因此，Vue 对象还没有诞生前，可以使用这个方法。我们常常在这个方法里做一些加载动画的行为。</p>
+<h4 id="created"><a href="#created" class="headerlink" title="created()"></a>created()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 然后就开始进入到 created 这个方法中来了，当我们进入到 created 的时候，实例就已经出来了，组件就已经被创建好了，属性也成功的被绑定了。但是 DOM 还没有生成，因为这个时候我们还没有进入到下面,Element 这个属性还不存在。<br>我们在这个方法中常常做的事情:<br></p>
+<blockquote>
+<p>1.获取对应的数据，比如我们请求网络接口，请求下来之后，把我们请求接口的数据赋给我们的属性，然后再往下走的时候就可以展示 DOM 了<br> 2.结束 loading 加载，准备去渲染当前的 DOM<br></p>
+</blockquote>
+<h4 id="渲染模板"><a href="#渲染模板" class="headerlink" title="渲染模板"></a>渲染模板</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当我们执行完 created,也就是说 Vue 实例化对象已经创建好之后，这个时候页面还没有展示出来，还要继续往下走。然后它会去看看有没有“el”,也就是 element 这个属性，如果有的话，它就会继续查看’template’这个选项有没有。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new (&#123;</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">components: &#123; App &#125;,</span><br><span class="line">template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果没有的话，它就会去查看 <strong>\$mount</strong> 这个里面有没有东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new (&#123;</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">components: &#123; App &#125;</span><br><span class="line">&#125;).$mount(&quot;#app&quot;)</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果这两者都没有的话，那么当前的生命周期就结束了。因为她没有可渲染的东西，当然就不会往下执行了。有其中一个的话，就会去看看 template。有两种情况，一个是 template 中会执行一个具体的组件(比如执行的是 App.vue)，一个是对应的标签。然后就会执行 render 方法去渲染模板中对应的内容.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new (&#123;</span><br><span class="line">//具体的组件</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">components: &#123; App &#125;,</span><br><span class="line">template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br><span class="line">//对应的标签</span><br><span class="line">new (&#123;</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">template: `</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;p&gt;Hello&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">`,</span><br><span class="line">components: &#123; App &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount()"></a>beforeMount()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 接下来，它就会进入到下一个钩子函数叫 beforeMount。Mount 是挂载，beforeMount 就是开始编译当前的模板了，这个方法是在虚拟 DOM 当中去执行的。也就是当前还不能看到对应的内容。它只是将这个东西挂载，但是还没有挂载上去，没有将真实的内容渲染到页面上去。可以在这里去做一些基础的工作，根据需求而定，</p>
+<h4 id="mounted"><a href="#mounted" class="headerlink" title="mounted()"></a>mounted()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执行完 beforeMount 之后，就可以执行另一个函数 mounted。beforeMount 到 mounted 的中间：执行完 beforeMount 之后，开始将 element 指向的元素，把 templeate 的东西往里面放。然后到 mounted 这个钩子函数时，模板已经编译完了，编译完之后就开始挂载了，挂载的时候呢，基本 mounted 这个方法一旦结束之后，页面就已经显示出来了。这个就是 mounted.所以如果我们有些东西想让它在页面显示出来之后再去操作，那么我们就要写在 mounted 这个方法里面。</p>
+<!-- 比如从后台获取数据，一定是在当前页面都显示完之后再去获取这个数据，那我们就要写在mounted里面。就是mounted一旦挂载，DOM就已经生成了，然后我们就可以看到对应的内容。 -->
+<h4 id="beforeUpdate-、updated"><a href="#beforeUpdate-、updated" class="headerlink" title="beforeUpdate()、updated()"></a>beforeUpdate()、updated()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DOM 生成后，我们就可以看到对应的内容。看到内容后，我们还会对当前项目做的事情就是对应的一些更改（增删改查），更改的话就是我们的 update。update 有两个，一个是 beforeUpdate,beforeUpdate 是当前组件在发生更新之前，需要调用的一个钩子函数。还有一个叫 updated，这个是组件更新之后，就是我们已经更新了当前组件，只要这个方法一旦执行完之后，页面就已经是展示出来的效果，如果想在更新之前做一些事情的话，就可以在 beforeUpdate 这个方法中去实现。一般来说，我们想要在当前组件发生一些改变的时候，我们需要调用的是 updated 这个方法，</p>
+<h4 id="beforeDestory-、destroyed"><a href="#beforeDestory-、destroyed" class="headerlink" title="beforeDestory()、destroyed()"></a>beforeDestory()、destroyed()</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上面结束之后，就进入到当前组件生命周期的尾部了，它在销毁之前，就调用一个 beforeDestory 这个钩子函数。此时实例仍然有功能。最后就是销毁之后，调用 destroyed。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后，我们来上手实践来帮助我们更好的理解钩子函数。以下是主要的代码，大家可以直接看看<a href="http://htmlpreview.github.com/?https://github.com/GWJacqueline/vue-demo/blob/life-cycle/dist/index.html" target="_blank" rel="noopener">效果</a>来帮助我更好的理解 Vue 实例的生命周期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &quot;LifeCycle&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      title: &quot;Vue实例的生命周期&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    changeTitle() &#123;</span><br><span class="line">      this.title = &quot;生命周期Update钩子&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeCreate() &#123;</span><br><span class="line">    alert(&quot;组件实例化之前的函数&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    alert(&quot;组件实例化完毕，但页面还未显示&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeMount() &#123;</span><br><span class="line">    alert(&quot;组件挂载前，页面仍未展示，但虚拟DOM已经配置&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    alert(&quot;组件挂载后，此方法执行后，页面显示&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeUpdate() &#123;</span><br><span class="line">    alert(&quot;组件更新前，页面仍未更新，但虚拟DOM已经配置&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  updated() &#123;</span><br><span class="line">    alert(&quot;组件更新，此方法执行后，页面显示&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy() &#123;</span><br><span class="line">    alert(&quot;组件销毁前&quot;);</span><br><span class="line">  &#125;,</span><br><span class="line">  destroyed() &#123;</span><br><span class="line">    alert(&quot;组件销毁&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/Vue实例生命周期/" target="_blank" title="Vue实例生命周期">https://gwjacqueline.github.io/Vue实例生命周期/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS框架/">JS框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/渐进式/">渐进式</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/Git常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Git常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期图解"><span class="nav-number">1.</span> <span class="nav-text">生命周期图解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#钩子函数"><span class="nav-number">1.1.</span> <span class="nav-text">钩子函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeCreate"><span class="nav-number">1.1.1.</span> <span class="nav-text">beforeCreate()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#created"><span class="nav-number">1.1.2.</span> <span class="nav-text">created()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染模板"><span class="nav-number">1.1.3.</span> <span class="nav-text">渲染模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeMount"><span class="nav-number">1.1.4.</span> <span class="nav-text">beforeMount()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mounted"><span class="nav-number">1.1.5.</span> <span class="nav-text">mounted()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeUpdate-、updated"><span class="nav-number">1.1.6.</span> <span class="nav-text">beforeUpdate()、updated()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeDestory-、destroyed"><span class="nav-number">1.1.7.</span> <span class="nav-text">beforeDestory()、destroyed()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">2.</span> <span class="nav-text">实例</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
