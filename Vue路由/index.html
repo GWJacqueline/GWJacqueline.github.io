@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>vue路由 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="JS框架渐进式路由">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;路由是端到端的数据传输路径。说白了，和a标签实现的功能一样,就是跳转。使用 a 标签点击多少次，就会发送多少次的网络请求。也就是当前页面会实现不停的刷新。而 vue-router 是一个与 vue 核心深度集成的前端路由框架，性能也优化的更好。输入的 URL 地址不会直接向服务器发送请求，而是浏览器 自己来解析路由信息，包括">
+<meta name="keywords" content="JS框架,渐进式,路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue路由">
+<meta property="og:url" content="https://gwjacqueline.github.io/Vue路由/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;路由是端到端的数据传输路径。说白了，和a标签实现的功能一样,就是跳转。使用 a 标签点击多少次，就会发送多少次的网络请求。也就是当前页面会实现不停的刷新。而 vue-router 是一个与 vue 核心深度集成的前端路由框架，性能也优化的更好。输入的 URL 地址不会直接向服务器发送请求，而是浏览器 自己来解析路由信息，包括">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-24T01:26:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue路由">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;路由是端到端的数据传输路径。说白了，和a标签实现的功能一样,就是跳转。使用 a 标签点击多少次，就会发送多少次的网络请求。也就是当前页面会实现不停的刷新。而 vue-router 是一个与 vue 核心深度集成的前端路由框架，性能也优化的更好。输入的 URL 地址不会直接向服务器发送请求，而是浏览器 自己来解析路由信息，包括">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Vue路由" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Vue路由
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/Vue路由/" class="article-date">
+	  <time datetime="2019-05-18T06:20:43.000Z" itemprop="datePublished">2019-05-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;路由是端到端的数据传输路径。说白了，和<strong>a</strong>标签实现的功能一样,就是跳转。使用 a 标签点击多少次，就会发送多少次的网络请求。也就是当前页面会实现不停的刷新。而 vue-router 是一个与 vue 核心深度集成的前端路由框架，性能也优化的更好。输入的 URL 地址不会直接向服务器发送请求，而是浏览器 自己来解析路由信息，包括地址，参数 ,然后来渲染组件。最后生成对应的视图。前端路由一般只向服务器获取数据，而不向服务器获取模板。Vue 路由可以帮助我们实现点击后，不会请求和页面刷新，直接就可以跳转到我们要去的位置。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大多数使用 Vue CLi 搭建的时候有安装路由模块，如果没有安装的话可以使用以下命令安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-router --save-dev</span><br></pre></td></tr></table></figure>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>1.在 router/index.js 中引入对应组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import About from &apos;@/components/about/About&apos;</span><br><span class="line">import Admin from &apos;@/components/Admin&apos;</span><br></pre></td></tr></table></figure>
+<p>2.在 router/index.js 使用 Router</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(Router)</span><br></pre></td></tr></table></figure>
+<p>3.在 router/index.js 配置路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/&apos;,  //路由地址</span><br><span class="line">      name: &apos;Home&apos;,  //路由名</span><br><span class="line">      component: Home,   //如果抓到了路由地址，需要让它调用component</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  //去掉URL中的#</span><br><span class="line">  mode: &apos;history&apos;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>4.在对应组件中使用</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用<strong>router-link 组件</strong>来导航，默认会被渲染成一个<code>&lt;a&gt;</code>标签，属性 <code>to</code>指定链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  &lt;ul&gt;</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">        &lt;router-link to=&quot;/&quot;&gt;Home&lt;/router-link&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">//展示对应路由视图</span><br><span class="line">&lt;router-view/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上的<strong>基本使用</strong>能帮我们搭建一个快速的路由。但是在实际的项目开发中开始远远不够的。接下来我们用<a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官方提供的 API</a>来总结一下常用的路由配置吧。</p>
+<h3 id="router-link-换标签"><a href="#router-link-换标签" class="headerlink" title="router-link 换标签"></a>router-link 换标签</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;router-link 默认是一个 a 标签，想要换成其他标签，就需要用到<code>tag</code>属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link  tag=“div&quot;&gt;&#123;&#123;nav.text&#125;&#125;&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//看，换成div了吧</span><br><span class="line">&lt;div data-v-61dd7a3d=&quot;&quot; class=&quot;nav-link&quot;&gt;注册&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="绑定动态路由地址"><a href="#绑定动态路由地址" class="headerlink" title="绑定动态路由地址"></a>绑定动态路由地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    //:to</span><br><span class="line">    &lt;router-link :to=&quot;login&quot;&gt;登录&lt;/router-link&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;Header&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      login: &quot;/Login&quot;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="找不到路由时，默认返回某页"><a href="#找不到路由时，默认返回某页" class="headerlink" title="找不到路由时，默认返回某页"></a>找不到路由时，默认返回某页</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里我们需要注意的是：含有通配符的路由应该放在最后，路由 { path: ‘*‘ } 通常用于客户端 404 错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/&apos;,</span><br><span class="line">      name: &apos;Home&apos;,</span><br><span class="line">      component: Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/Menu&apos;,</span><br><span class="line">      name: &apos;Menu&apos;,</span><br><span class="line">      component: Menu</span><br><span class="line">    &#125;,</span><br><span class="line">    //上面这些东西没有匹配上，就会走*号,跳转回主页</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;*&apos;,</span><br><span class="line">      redirect: &apos;/&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  mode: &apos;history&apos;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="利用路由名跳转"><a href="#利用路由名跳转" class="headerlink" title="利用路由名跳转"></a>利用路由名跳转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;name:&apos;Register&apos;&#125;&quot;&gt;注册&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="跳转到上一次浏览的页面"><a href="#跳转到上一次浏览的页面" class="headerlink" title="跳转到上一次浏览的页面"></a>跳转到上一次浏览的页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.go(-1);</span><br></pre></td></tr></table></figure>
+<h3 id="跳转到指定地址"><a href="#跳转到指定地址" class="headerlink" title="跳转到指定地址"></a>跳转到指定地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.$router.replace(&quot;/Menu&quot;)</span><br><span class="line">//通过名字跳转</span><br><span class="line">this.$router.replace(&#123; name: &quot;Admin&quot; &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="通过-push-进行跳转"><a href="#通过-push-进行跳转" class="headerlink" title="通过 push 进行跳转"></a>通过 push 进行跳转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&quot;/Login&quot;);</span><br><span class="line">//通过名字</span><br><span class="line">this.$router.push(&#123; name: &quot;Login&quot; &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="路由嵌套"><a href="#路由嵌套" class="headerlink" title="路由嵌套"></a>路由嵌套</h3><p>要在嵌套的出口中渲染组件，需要在 VueRouter 的参数中使用 children 配置<br><br>router/index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/about/About&apos;,</span><br><span class="line">      name: &apos;About&apos;,</span><br><span class="line">      component: About,</span><br><span class="line">      //默认展示路由</span><br><span class="line">      redirect: &apos;/about/About/History&apos;,</span><br><span class="line">      // 二级路由</span><br><span class="line">      children: [</span><br><span class="line">        //path可以自己定</span><br><span class="line">        &#123;</span><br><span class="line">          path: &apos;/about/About/Contact&apos;,</span><br><span class="line">          name: &apos;Contact&apos;,</span><br><span class="line">          component: Contact,</span><br><span class="line">          redirect: &apos;/about/About/Contact/Phone&apos;,</span><br><span class="line">          //三级路由</span><br><span class="line">          children: [</span><br><span class="line">            &#123; path: &apos;/about/About/Contact/Phone&apos;, name: &apos;Phone&apos;, component: Phone &#125;,</span><br><span class="line">            &#123; path: &apos;/about/About/Contact/PersonName&apos;, name: &apos;PersonName&apos;, component: PersonName &#125;,</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path: &apos;/about/About/Delivery&apos;,</span><br><span class="line">          name: &apos;Delivery&apos;,</span><br><span class="line">          component: Delivery</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path: &apos;/about/About/History&apos;,</span><br><span class="line">          name: &apos;History&apos;,</span><br><span class="line">          component: History</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="导航守卫"><a href="#导航守卫" class="headerlink" title="导航守卫"></a>导航守卫</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;导航守卫我们可以把它看做是 <code>vue-router</code> 的生命周期钩子。我们通过”用户在某网站在买东西，很多时候都需要先登录或注册“这么一个场景来更好的理解导航守卫吧。</p>
+<h4 id="全局守卫"><a href="#全局守卫" class="headerlink" title="全局守卫"></a>全局守卫</h4><h5 id="全局前置守卫-router-beforeEach"><a href="#全局前置守卫-router-beforeEach" class="headerlink" title="全局前置守卫 router.beforeEach"></a>全局前置守卫 router.beforeEach</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接下来，我们用 Vue 的全局守卫实现一个场景：当用户在未登录某网站前，每跳转一个页面，都提示用户”未登录，请登录“</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">  //判断用户是否去登录或者注册页</span><br><span class="line">  if (to.name == &apos;Login&apos; || to.name == &apos;Register&apos;) &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    alert(&quot;未登录，请登录&quot;);</span><br><span class="line">    //未登录就引导到登录页面上，也可以这么写next(&#123; path: &apos;/&apos; &#125;)</span><br><span class="line">    next(&apos;/Login&apos;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们用<code>router.beforeEach</code> 注册一个全局前置守卫。它进入组件之前触发它接受三个参数：<br><br>1.to——要跳转到哪个组件里面去<br><br>2.from——从哪个路由离开<br><br>3.next: Function—— 一个方法，决定是否要展示看到路由的页面</p>
+<h5 id="全局后置钩子-router-afterEach"><a href="#全局后置钩子-router-afterEach" class="headerlink" title="全局后置钩子 router.afterEach"></a>全局后置钩子 router.afterEach</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有全局前置守卫，当然也有全局后置钩子啦。但是基本上全局前置守卫使用的较多，后置钩子使用的较少。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router.afterEach((to, from) =&gt; &#123;</span><br><span class="line">  //进入组件后，展示出来</span><br><span class="line">  alert(&quot;after each&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们用<code>router.afterEach</code> 注册全局后置钩子。它进入组件之后触发它接受两个参数：<br><br>1.to——要去的组件<br><br>2.from——离开的组件<br></p>
+<h4 id="路由独享守卫-beforeEnter"><a href="#路由独享守卫-beforeEnter" class="headerlink" title="路由独享守卫 beforeEnter"></a>路由独享守卫 beforeEnter</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在进入某个路由前，调用的方法。只针对路由控制的部分。我们还是用代码来实现一个场景帮助我们更好的理解吧。比如：用户在去购买页前，需要判断是否登录，如果没有登录，要先登录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/Buy&apos;,</span><br><span class="line">      name: &apos;Buy&apos;,</span><br><span class="line">      component: Buy,</span><br><span class="line">      //路由独享守卫</span><br><span class="line">      beforeEnter: (to, from, next) =&gt; &#123;</span><br><span class="line">        if (to.name == &apos;Login&apos; || to.name == &apos;Register&apos;) &#123;</span><br><span class="line">          next();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          alert(&quot;未登录不能购买&quot;);</span><br><span class="line">          //引导到登录页面上</span><br><span class="line">          next(&apos;/Login&apos;);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在需要配置的路由上上定义 beforeEnter 守卫。它和全局前置守卫的方法参数一致。</p>
+<h4 id="组件内守卫"><a href="#组件内守卫" class="headerlink" title="组件内守卫"></a>组件内守卫</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以直接在路由组件内定义路由导航。在进入路由时，我们可以对它进行一些操作，离开路由后，我们也可以进行一些操作。<br></p>
+<h5 id="进入到当前组件的时-beforeRouteEnter"><a href="#进入到当前组件的时-beforeRouteEnter" class="headerlink" title="进入到当前组件的时 beforeRouteEnter"></a>进入到当前组件的时 beforeRouteEnter</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &quot;Menu&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      name: &quot;Hery&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  //进入到当前组件的时</span><br><span class="line">  beforeRouteEnter(to, from, next) &#123;</span><br><span class="line">     alert(&quot;Hello&quot; + this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>以上的写法，我们会发现拿不到<code>name</code>,因为 data 渲染之前，beforeRouteEnter 就已经执行了。我们需要通过传一个回调给 next 来访问组件实例。因为是异步的，所以在 data 渲染完，就可以拿到值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &quot;Menu&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      name: &quot;Hery&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeRouteEnter(to, from, next) &#123;</span><br><span class="line">    next(vm =&gt; &#123;</span><br><span class="line">      alert(&quot;Hello&quot; + vm.name);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="离开当前组件时-beforeRouteLeave"><a href="#离开当前组件时-beforeRouteLeave" class="headerlink" title="离开当前组件时 beforeRouteLeave"></a>离开当前组件时 beforeRouteLeave</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  name: &quot;Menu&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      name: &quot;Hery&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  //离开当前组件时</span><br><span class="line">  beforeRouteLeave(to, from, next) &#123;</span><br><span class="line">    if (confirm(&quot;确定离开吗&quot;) == true) &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      //不显示</span><br><span class="line">      next(false);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="当前路由改变，但是该组件被复用时-beforeRouteUpdate"><a href="#当前路由改变，但是该组件被复用时-beforeRouteUpdate" class="headerlink" title="当前路由改变，但是该组件被复用时 beforeRouteUpdate"></a>当前路由改变，但是该组件被复用时 beforeRouteUpdate</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  //在动态路由情形下，比如 path: &apos;/user/:id&apos; 这条路由，当页面不变更只动态的改变参数id时，beforeRouteUpdate便会触发</span><br><span class="line">  beforeRouteUpdate (to, from, next) &#123;</span><br><span class="line">   ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="路由复用"><a href="#路由复用" class="headerlink" title="路由复用"></a>路由复用</h3><p>1.在需要复用的组件内给 router-view 进行赋值，实现路由的简单复用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-view name=&quot;OrderingGuide&quot;&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;router-view name=&quot;Delivery&quot;&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure>
+<p>2.在展示组件的路由内配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/&apos;,</span><br><span class="line">      name: &apos;Home&apos;,</span><br><span class="line">      //组件复用</span><br><span class="line">      components: &#123;</span><br><span class="line">        default: Home,</span><br><span class="line">        &apos;OrderingGuide&apos;: OrderingGuide,</span><br><span class="line">        &apos;Delivery&apos;: Delivery,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="控制滚动行为"><a href="#控制滚动行为" class="headerlink" title="控制滚动行为"></a>控制滚动行为</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vue-router 可以让我们控制页面展示的位置。需要<strong>注意：</strong>这个功能只在支持 history.pushState 的浏览器中可用。</p>
+<p>跳转到指定位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, from, savedPosition) &#123;</span><br><span class="line">    return &#123;x: 0,y: 100&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scrollBehavior 方法接收 to 和 from 路由对象。第三个参数 savedPosition 当且仅当 popstate 导航 (通过浏览器的 前进/后退 按钮触发) 时才可用。</p>
+<p>跳转到某个选择器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, from, savedPosition) &#123;</span><br><span class="line">    return &#123;selector: &apos;.btn&apos;,&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>滚动到指定滚动到锚点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, from, savedPosition) &#123;</span><br><span class="line">    return &#123;selector: to.hash&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>返回到之前阅读的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [...],</span><br><span class="line">  scrollBehavior(to, from, savedPosition) &#123;</span><br><span class="line">    if (savedPosition) &#123;</span><br><span class="line">      return savedPosition;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      return &#123; x: 0, y: 0 &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上具体代码可以到<a href="https://github.com/GWJacqueline/vue-demo/tree/vue-router" target="_blank" rel="noopener">这里</a>查阅。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/Vue路由/" target="_blank" title="Vue路由">https://gwjacqueline.github.io/Vue路由/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS框架/">JS框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/渐进式/">渐进式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由/">路由</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Vue-http请求/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Vue http请求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Vue实例生命周期/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Vue实例生命周期</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶使用"><span class="nav-number">3.</span> <span class="nav-text">进阶使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#router-link-换标签"><span class="nav-number">3.1.</span> <span class="nav-text">router-link 换标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定动态路由地址"><span class="nav-number">3.2.</span> <span class="nav-text">绑定动态路由地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找不到路由时，默认返回某页"><span class="nav-number">3.3.</span> <span class="nav-text">找不到路由时，默认返回某页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用路由名跳转"><span class="nav-number">3.4.</span> <span class="nav-text">利用路由名跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转到上一次浏览的页面"><span class="nav-number">3.5.</span> <span class="nav-text">跳转到上一次浏览的页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转到指定地址"><span class="nav-number">3.6.</span> <span class="nav-text">跳转到指定地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-push-进行跳转"><span class="nav-number">3.7.</span> <span class="nav-text">通过 push 进行跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由嵌套"><span class="nav-number">3.8.</span> <span class="nav-text">路由嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航守卫"><span class="nav-number">3.9.</span> <span class="nav-text">导航守卫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局守卫"><span class="nav-number">3.9.1.</span> <span class="nav-text">全局守卫</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#全局前置守卫-router-beforeEach"><span class="nav-number">3.9.1.1.</span> <span class="nav-text">全局前置守卫 router.beforeEach</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#全局后置钩子-router-afterEach"><span class="nav-number">3.9.1.2.</span> <span class="nav-text">全局后置钩子 router.afterEach</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由独享守卫-beforeEnter"><span class="nav-number">3.9.2.</span> <span class="nav-text">路由独享守卫 beforeEnter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件内守卫"><span class="nav-number">3.9.3.</span> <span class="nav-text">组件内守卫</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#进入到当前组件的时-beforeRouteEnter"><span class="nav-number">3.9.3.1.</span> <span class="nav-text">进入到当前组件的时 beforeRouteEnter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#离开当前组件时-beforeRouteLeave"><span class="nav-number">3.9.3.2.</span> <span class="nav-text">离开当前组件时 beforeRouteLeave</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#当前路由改变，但是该组件被复用时-beforeRouteUpdate"><span class="nav-number">3.9.3.3.</span> <span class="nav-text">当前路由改变，但是该组件被复用时 beforeRouteUpdate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由复用"><span class="nav-number">3.10.</span> <span class="nav-text">路由复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制滚动行为"><span class="nav-number">3.11.</span> <span class="nav-text">控制滚动行为</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
