@@ -175,6 +175,63 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-异步加载js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/异步加载js/">异步加载js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/异步加载js/" class="article-date">
+	  <time datetime="2019-06-06T12:22:47.000Z" itemprop="datePublished">2019-06-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          <!--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加载 JS 最常见的方法就是在&lt;head&gt;中插入&lt;script type=&quot;text/javascript&quot; src=&quot;balabala&quot;&gt;&lt;/scr...-->
+            <!--更多后不显示-->
+            <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加载 JS 最常见的方法就是在<code>&lt;head&gt;</code>中插入<code>&lt;script type=&quot;text/javascript&quot; src=&quot;balabala&quot;&gt;&lt;/script&gt;</code>在浏览器解析过程中，一旦发现<code>&lt;script&gt;</code>，就会阻止浏览器的后续处理。直至等待脚本下载并执行完后，才继续恢复解析 HTML 网页。这是因为 JS 中可能会修改 DOM 还有重定向行为等。所以默认同步执行才是安全的，否则会导致复杂的<a href="https://blog.csdn.net/u013516966/article/details/44733899" target="_blank" rel="noopener">线程竞赛问题</a>。所以一般建议把<code>&lt;script&gt;</code>放在<code>&lt;body&gt;</code>结尾处，这样尽可能减少页面阻塞。如果 JS 是来源于网页开发者自己的 JS 代码，内容是开发者可以控制的。那么我们可以采用以下三种方式去提高性能：<br><br>1、合并文件：当有多个<code>script</code>标签引用时，我们根据需求合并至单个。这样有助于建立一次 TCP 连接，就可完成下载。<br>2、压缩文件：利用压缩工具压缩 JS，去除多余的空格和注释，减少文件大小。<br> 3、末尾加载：把<code>&lt;script&gt;</code>写在<code>&lt;body&gt;</code>结尾处，因为整个文档正文已经加载完毕。<br><br>如果我们使用的是第三方 JS，类似高德地图等由其他服务提供商提供的，这时 JS 代码并不受我们控制，就很有可能出现加载时间很长，甚至失败的情况。时间太长则会造成浏览器“假死”，页面一片空白。如果第三方 JS 代码越多，则这种风险就越大。所以就要考虑如果在加载第三方 JS 的情况下，保证自己网站的加载速度。如果这个时间还采用同步加载，带来的体验往往并不好。所以我们可以采用异步加载这些第三方 JS。</p>
+</blockquote>
+        </p>
+        <p class="article-more-link">
+          <a href="/异步加载js/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-搭建Vuex中央状态管理" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="article-inner">
     
@@ -682,63 +739,6 @@ fixed 定位问题
         </p>
         <p class="article-more-link">
           <a href="/JS异步编程的那些事(二)/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-
-  
-    <article id="post-JS异步编程的那些事(一)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/JS异步编程的那些事(一)/">JS异步编程的那些事(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/JS异步编程的那些事(一)/" class="article-date">
-	  <time datetime="2019-04-18T13:31:33.000Z" itemprop="datePublished">2019-04-18</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/js/">js</a>
-
-      
-      
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p class="article-excerpt-content">
-          <!--
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从最早的回调函数，之后迎来了 promise,再次就是上篇文章说的 generator，js 解决异步的方案一次次的再优化，ES7 中出现的 Async/await 是目前 js 中异步最终极的解决方案，我的妈耶不谈兼容...-->
-            <!--更多后不显示-->
-            <blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从最早的回调函数，之后迎来了 promise,再次就是上篇文章说的 <a href="https://gwjacqueline.github.io/generator%E7%94%9F%E6%88%90%E5%99%A8/">generator</a>，js 解决异步的方案一次次的再优化，ES7 中出现的 Async/await 是目前 js 中异步最终极的解决方案，我的妈耶不谈兼容问题的话，实在是太好用啦。虽然兼容性真的很一般，但是我们可以用 polyfill(js 修补器)去兼容一下呀。接下来我将简单介绍下 Promise、fetch、 Async/await 以及分别用 fetch 和 Async/await 去封装一个增删改查的方法。来看看编写异步代码的过程是如何一步步变得优雅起来的。</p>
-</blockquote>
-        </p>
-        <p class="article-more-link">
-          <a href="/JS异步编程的那些事(一)/#more">阅读全文</a>
         </p>
       
     </div>

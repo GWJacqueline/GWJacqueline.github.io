@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>异步加载js | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="异步网页性能优化">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;加载 JS 最常见的方法就是在&amp;lt;head&amp;gt;中插入&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;balabala&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;在浏览器解析过程中，一旦发现&amp;lt;script&amp;gt;，就会阻止浏览器的后续处理。直至等待">
+<meta name="keywords" content="异步,网页性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异步加载js">
+<meta property="og:url" content="https://gwjacqueline.github.io/异步加载js/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;加载 JS 最常见的方法就是在&amp;lt;head&amp;gt;中插入&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;balabala&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;在浏览器解析过程中，一旦发现&amp;lt;script&amp;gt;，就会阻止浏览器的后续处理。直至等待">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-07T10:25:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="异步加载js">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;加载 JS 最常见的方法就是在&amp;lt;head&amp;gt;中插入&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;balabala&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;在浏览器解析过程中，一旦发现&amp;lt;script&amp;gt;，就会阻止浏览器的后续处理。直至等待">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-异步加载js" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      异步加载js
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/异步加载js/" class="article-date">
+	  <time datetime="2019-06-06T12:22:47.000Z" itemprop="datePublished">2019-06-06</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加载 JS 最常见的方法就是在<code>&lt;head&gt;</code>中插入<code>&lt;script type=&quot;text/javascript&quot; src=&quot;balabala&quot;&gt;&lt;/script&gt;</code>在浏览器解析过程中，一旦发现<code>&lt;script&gt;</code>，就会阻止浏览器的后续处理。直至等待脚本下载并执行完后，才继续恢复解析 HTML 网页。这是因为 JS 中可能会修改 DOM 还有重定向行为等。所以默认同步执行才是安全的，否则会导致复杂的<a href="https://blog.csdn.net/u013516966/article/details/44733899" target="_blank" rel="noopener">线程竞赛问题</a>。所以一般建议把<code>&lt;script&gt;</code>放在<code>&lt;body&gt;</code>结尾处，这样尽可能减少页面阻塞。如果 JS 是来源于网页开发者自己的 JS 代码，内容是开发者可以控制的。那么我们可以采用以下三种方式去提高性能：<br><br>1、合并文件：当有多个<code>script</code>标签引用时，我们根据需求合并至单个。这样有助于建立一次 TCP 连接，就可完成下载。<br>2、压缩文件：利用压缩工具压缩 JS，去除多余的空格和注释，减少文件大小。<br> 3、末尾加载：把<code>&lt;script&gt;</code>写在<code>&lt;body&gt;</code>结尾处，因为整个文档正文已经加载完毕。<br><br>如果我们使用的是第三方 JS，类似高德地图等由其他服务提供商提供的，这时 JS 代码并不受我们控制，就很有可能出现加载时间很长，甚至失败的情况。时间太长则会造成浏览器“假死”，页面一片空白。如果第三方 JS 代码越多，则这种风险就越大。所以就要考虑如果在加载第三方 JS 的情况下，保证自己网站的加载速度。如果这个时间还采用同步加载，带来的体验往往并不好。所以我们可以采用异步加载这些第三方 JS。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="async-属性"><a href="#async-属性" class="headerlink" title="async 属性"></a><a href="http://www.w3school.com.cn/html5/att_script_async.asp" target="_blank" rel="noopener">async</a> 属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 指定async属性,异步加载完马上执行。以及 onload 回调--&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;balabala.js&quot; async=&quot;async&quot; onload=&quot;init()&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>async</code>是 HTML5 新增的属性，IE10 和大部分浏览器都是支持该属性的。该属性的作用是让脚本能异步加载，也就是会开启一个线程去加载 JS，会在下载完后立即执行。但是一些旧浏览器并不支持。从而导致 JS 文件在这些浏览器中不是异步的，并且会阻止掉页面渲染。但是如果我们做的是移动端的产品，移动端的浏览器大多支持<code>aysnc</code>，我们就可以大胆放心的用啦。带有<code>async</code>属性的脚本在 script 文件下载完成后会立即执行，并且其执行时间一定在 window 的 load 事件触发之前。所以这意味着多个带有<code>async</code>属性的脚本并不保证会按其在页面中的出现先后顺序执行。因此要确保带有<code>async</code>属性的脚本之间互不依赖非常重要。如果对执行的先后顺序有要求，那让我们来看看<code>defer</code>。</p>
+<h3 id="defer-属性"><a href="#defer-属性" class="headerlink" title="defer 属性"></a><a href="http://www.w3school.com.cn/tags/att_script_defer.asp" target="_blank" rel="noopener">defer</a> 属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 指定defer属性,异步加载完延迟执行。--&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;balabala.js&quot; defer=&quot;defer&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个属性和<code>async</code>类似，都用于改变处理脚本的行为。都是只适用于外部脚本文件，都会开启一个线程去下载 JS 文件。但是与<code>async</code>不同的是，<code>defer</code>会告诉浏览器延迟执行。就是在 DOM 渲染后之后再按顺序执行 JS。也就是说 async 是乱序的，而 defer 是顺序执行。</p>
+<p><strong>要注意的是两者都不应该使用 document.write，这个导致整个页面被清除</strong></p>
+<h3 id="defer-和-async-一起用"><a href="#defer-和-async-一起用" class="headerlink" title="defer 和 async 一起用"></a>defer 和 async 一起用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;balabala.js&quot; async=&quot;async&quot; defer=&quot;defer&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;测试后发现在谷歌浏览器上表现和只使用<code>async</code>一致.当浏览器同时使用了 <code>async</code> 和 <code>defer</code> 属性之后，浏览器会忽略 <code>defer</code>属性.对于不支持 async 的浏览器,会自动使用<code>defer属性</code>。</p>
+<h3 id="动态创建-script-标签"><a href="#动态创建-script-标签" class="headerlink" title="动态创建 script 标签"></a>动态创建 script 标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(url, callback) &#123;</span><br><span class="line">    var script = document.createElement(&quot;script&quot;);</span><br><span class="line">    script.type = &quot;text/javascript&quot;;</span><br><span class="line">    if (typeof callback != &quot;undefined&quot;) &#123;</span><br><span class="line">        if (script.readyState) &#123;</span><br><span class="line">        //IE</span><br><span class="line">        script.onreadystatechange = function() &#123;</span><br><span class="line">            if (</span><br><span class="line">                this.readyState == &quot;complete&quot; ||script.readyState == &quot;loaded&quot;</span><br><span class="line">            ) &#123;</span><br><span class="line">                script.onreadystatechange = null;</span><br><span class="line">                callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">        //其他浏览器</span><br><span class="line">            script.onload = function() &#123;</span><br><span class="line">                callback();</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    script.src = url;</span><br><span class="line">    document.body.appendChild(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要失败的回调，可以通过设置定时器的方式来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//失败成功回调</span><br><span class="line">var timer;</span><br><span class="line">function time()&#123;</span><br><span class="line">    timer=setTimeout(function()&#123;</span><br><span class="line">        if(timer)&#123;</span><br><span class="line">            timer=&quot;&quot;;</span><br><span class="line">            //定时器未在指定时间内收到请求,终止调用，执行错误回调</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            //调用成功</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,20000);</span><br><span class="line">    loadScript(&quot;balabala.js&quot;,set);</span><br><span class="line">&#125;</span><br><span class="line">var set = function()&#123;</span><br><span class="line">    if(timer)&#123;</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        timer=&quot;&quot;;</span><br><span class="line">        //收到请求，执行成功回调并清空定时器</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //收到清空，已执行错误回调</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种方法是在页面中<code>&lt;script&gt;</code>标签内，用 js 创建一个 script 元素并插入到 document 中。这样就做到了非阻塞的下载 js 代码。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上列出的三种方案。动态创建 script 标签是目前兼容性最好、普适性最高的方案。如果我们的用户大多是移动端或者不需要兼容 IE10 以下的浏览器，那么<code>async</code>属性使最合适的。如果我们不介意 JS 的执行会被延后到文档解析完毕后再执行，而且对加载顺序有所要求，那么<code>defer</code>是最合适的方案。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/异步加载js/" target="_blank" title="异步加载js">https://gwjacqueline.github.io/异步加载js/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步/">异步</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网页性能优化/">网页性能优化</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/搭建Vuex中央状态管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">搭建Vuex中央状态管理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#async-属性"><span class="nav-number">1.</span> <span class="nav-text">async 属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer-属性"><span class="nav-number">2.</span> <span class="nav-text">defer 属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer-和-async-一起用"><span class="nav-number">3.</span> <span class="nav-text">defer 和 async 一起用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态创建-script-标签"><span class="nav-number">4.</span> <span class="nav-text">动态创建 script 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
