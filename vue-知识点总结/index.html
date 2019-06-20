@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>vue 知识点总结 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="jsvue">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了给自己加深记忆，就整理一篇关于vue知识点的文章吧。">
+<meta name="keywords" content="js,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue 知识点总结">
+<meta property="og:url" content="https://gwjacqueline.github.io/vue-知识点总结/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了给自己加深记忆，就整理一篇关于vue知识点的文章吧。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-20T03:37:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue 知识点总结">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了给自己加深记忆，就整理一篇关于vue知识点的文章吧。">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-vue-知识点总结" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      vue 知识点总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/vue-知识点总结/" class="article-date">
+	  <time datetime="2019-06-15T06:00:42.000Z" itemprop="datePublished">2019-06-15</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了给自己加深记忆，就整理一篇关于<code>vue</code>知识点的文章吧。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="vue-中的-mvvm"><a href="#vue-中的-mvvm" class="headerlink" title="vue 中的 mvvm"></a>vue 中的 mvvm</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>mvvm</code>全称是 Model-View-ViewModel，是一种基于前端开发的架构模式，Model 层主要用来定义数据对象和操作的业务逻辑，<code>vm.$data</code>就是 vue 中的 Model 层。View 层就是负责将数据模型转化成 UI 展示出来，<code>vm.$el</code>是被 Vue 实例管理的 DOM 节点，当一个 vue 实例被创建时，它会递归遍历根元素的所有子节点，完成数据绑定并编译到<code>template</code>中，<code>template</code>中的内容就相当于 View 层。ViewModel 是一个同步 View 和 Model 的对象，是 Vue 的核心。在 mvvm 架构下，View 和 Model 之间并没有直接的联系，而是通过 ViewModel 进行交互的，因此 View 数据的变化会同步到 Model 中，而 Model 数据的变化也会立即反应到 View 上。<code>var vm = new Vue({ /* options */ })</code>在 Vue.js 中，每个 Vue 实例都是一个 ViewModel。因此，开发者只需要关注关注业务逻辑，不需要手动操作 DOM，不需要关注数据状态同步的问题，复杂的数据转态维护完全由 MVVM 来统一管理。</p>
+<blockquote>
+<p>具体请看<a href="https://gwjacqueline.github.io/vue-实现原理(一">vue 实现原理(一)</a>&gt;)、<a href="https://gwjacqueline.github.io/vue-实现原理(二">vue 实现原理(二)</a>&gt;)</p>
+</blockquote>
+<h2 id="vue-的双向绑定的原理简介"><a href="#vue-的双向绑定的原理简介" class="headerlink" title="vue 的双向绑定的原理简介"></a>vue 的双向绑定的原理简介</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调</p>
+<h2 id="mvvm-和-mvc-的区别以及适合的场景"><a href="#mvvm-和-mvc-的区别以及适合的场景" class="headerlink" title="mvvm 和 mvc 的区别以及适合的场景"></a>mvvm 和 mvc 的区别以及适合的场景</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mvvm 和 mvc 都是一种设计思想。主要是 mvc 中的 controller 演变成了 mvvm 中的 viewModel。mvvm 主要解决了 mvc 中大量的 DOM 操作使页面渲染性能降低，加载速度变慢，影响用户体验的问题。最大的区别就是 vue 是数据驱动，是通过数据来显示视图而不是节点操作。mvvm 适合数据操作比较多的场景。</p>
+<h2 id="vue-的特点"><a href="#vue-的特点" class="headerlink" title="vue 的特点"></a>vue 的特点</h2><ul>
+<li>简洁：页面由 HTML 模板+Json 数据+Vue 实例组成</li>
+<li>数据驱动：自动计算属性和追踪依赖的模板表达式</li>
+<li>组件化：用可复用、解耦的组件来构造页面</li>
+<li>轻量：代码量小，不依赖其他库</li>
+<li>快速：精确有效批量 DOM 更新</li>
+<li>模板友好：可通过 npm，bower 等多种方式安装，很容易融入</li>
+</ul>
+<h2 id="v-show-指令，v-if-的区别"><a href="#v-show-指令，v-if-的区别" class="headerlink" title="v-show 指令，v-if 的区别"></a>v-show 指令，v-if 的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;两者都是条件渲染执行。<code>v-show</code>的值无论为 false 或是 true，元素都会在 html 代码中，false 时<code>display：none</code>，true 为<code>display:block</code>。而<code>v-if</code>只有当值为 true 时，元素才会存在于 html 代码中。</p>
+<h2 id="如何让-css-只在当前组件中起作用"><a href="#如何让-css-只在当前组件中起作用" class="headerlink" title="如何让 css 只在当前组件中起作用"></a>如何让 css 只在当前组件中起作用</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Vue-生命周期"><a href="#Vue-生命周期" class="headerlink" title="Vue 生命周期"></a>Vue 生命周期</h2><blockquote>
+<p>具体请看之前的文章<a href="https://gwjacqueline.github.io/Vue%E5%AE%9E%E4%BE%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Vue 实例生命周期</a></p>
+</blockquote>
+<h2 id="Vue-路由"><a href="#Vue-路由" class="headerlink" title="Vue 路由"></a>Vue 路由</h2><blockquote>
+<p>具体请看之前的文章<a href="https://gwjacqueline.github.io/Vue%E8%B7%AF%E7%94%B1/">Vue 路由</a></p>
+</blockquote>
+<h2 id="组件之间传值"><a href="#组件之间传值" class="headerlink" title="组件之间传值"></a>组件之间传值</h2><p>父组件与子组件传值：Props</p>
+<p>子组件向父组件传递数据: 子组件通过\$emit 方法传递参数,触发父组件 event</p>
+<h2 id="vuex-的-mutation-和-action-的特性及区别"><a href="#vuex-的-mutation-和-action-的特性及区别" class="headerlink" title="vuex 的 mutation 和 action 的特性及区别"></a>vuex 的 mutation 和 action 的特性及区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mutation 用于修改 state 的数据，是同步的。action 类似于 muation, 不同在于：action 提交的是 mutation,而不是直接变更状态，并且 action 可以包含任意异步操作。</p>
+<blockquote>
+<p>有关 vuex 的请看之前的文章<a href="https://gwjacqueline.github.io/%E6%90%AD%E5%BB%BAVuex%E4%B8%AD%E5%A4%AE%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/">搭建 Vuex 中央状态管理</a></p>
+</blockquote>
+<h2 id="为什么使用-v-for-时必须添加唯一的-key"><a href="#为什么使用-v-for-时必须添加唯一的-key" class="headerlink" title="为什么使用 v-for 时必须添加唯一的 key"></a>为什么使用 v-for 时必须添加唯一的 key</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在开发过程中，我们需要保证某个元素的 key 在其同级元素中具有唯一性。采用的是<code>就地复用策略</code>。即列表数据修改的时候,他会根据 key 值去判断某个值是否修改,如果修改,则重新渲染这一项,否则复用之前的元素。从而减少不必要的元素重渲染在 Diff 算法中 会借助元素的 Key 值来判断该元素是新近创建的还是被移动而来的元素，从而减少不必要的元素重渲染.</p>
+<h2 id="computed-和-watched-的区别"><a href="#computed-和-watched-的区别" class="headerlink" title="computed 和 watched 的区别"></a>computed 和 watched 的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;computed 是计算属性，依赖其他属性计算值，并且 computed 的值有缓存，只有当计算值变化才会返回内容。watch 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。如果一个数据依赖于其它数据，那么我们常用 computed 去解决，如果需要在某个数据变化时做一些事情，那么就更适合用 watch 了</p>
+<h2 id="当-vue-的-data-里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图"><a href="#当-vue-的-data-里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图" class="headerlink" title="当 vue 的 data 里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图"></a>当 vue 的 data 里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不会。 受 ES5 的限制，Vue.js 不能检测到对象属性的添加或删除。因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。<br>需要使用<code>$set()方法</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$<span class="keyword">set</span>(this.object, key, value);</span><br><span class="line">//或者</span><br><span class="line">Vue.<span class="keyword">set</span>(vm.obj, key, value);</span><br></pre></td></tr></table></figure>
+<h2 id="delete-和-Vue-delete-删除数组的区别"><a href="#delete-和-Vue-delete-删除数组的区别" class="headerlink" title="delete 和 Vue.delete 删除数组的区别"></a>delete 和 Vue.delete 删除数组的区别</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"><span class="keyword">var</span> b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">delete</span> a[<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="comment">// [4, empty, 6, __ob__: Observer]</span></span><br><span class="line"><span class="comment">// 0: 4</span></span><br><span class="line"><span class="comment">// 2: 6</span></span><br><span class="line"><span class="comment">//length: 3</span></span><br><span class="line"><span class="keyword">this</span>.$<span class="keyword">delete</span>(b, <span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">//[2, 3, __ob__: Observer]</span></span><br><span class="line"><span class="comment">//0: 2</span></span><br><span class="line"><span class="comment">//1: 3</span></span><br><span class="line"><span class="comment">//length: 2</span></span><br></pre></td></tr></table></figure>
+<p>以上代码可以看出<code>delete</code>只是被删除的元素变成了 empty/undefined 其他的元素的键值还是不变。<code>Vue.delete</code>直接删除了数组 改变了数组的键值</p>
+<h2 id="如何优化-SPA-应用的首屏加载速度慢的问题"><a href="#如何优化-SPA-应用的首屏加载速度慢的问题" class="headerlink" title="如何优化 SPA 应用的首屏加载速度慢的问题"></a>如何优化 SPA 应用的首屏加载速度慢的问题</h2><ul>
+<li><p>将公用的 JS 库通过 script 标签外部引入，减小 app.bundel 的大小，让浏览器并行下载资源文件，提高下载速度</p>
+</li>
+<li><p>在配置 路由时，页面和组件使用懒加载的方式引入，进一步缩小 app.bundel 的体积，在调用某个组件时再加载对应的 js 文件</p>
+</li>
+<li><p>加一个首屏 loading 图，提升用户体验</p>
+</li>
+</ul>
+<h2 id="指令-keep-alive"><a href="#指令-keep-alive" class="headerlink" title="指令 keep-alive"></a>指令 keep-alive</h2><p>在 vue-router 写着 ，keep-alive 的含义：如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个 keep-alive 指令</p>
+<p>感谢以下文章对我总结 vue 的帮助：</p>
+<p><a href="https://juejin.im/post/5aae19aa6fb9a028d4445d1a" target="_blank" rel="noopener">https://juejin.im/post/5aae19aa6fb9a028d4445d1a</a><br><a href="https://zhuanlan.zhihu.com/p/53703176" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/53703176</a><br><a href="http://web.jobbole.com/95670/" target="_blank" rel="noopener">http://web.jobbole.com/95670/</a><br><a href="https://juejin.im/post/5d046560f265da1b961301d8" target="_blank" rel="noopener">https://juejin.im/post/5d046560f265da1b961301d8</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/vue-知识点总结/" target="_blank" title="vue 知识点总结">https://gwjacqueline.github.io/vue-知识点总结/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/vue-实现原理(一)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          vue 实现原理(一)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/函数的节流与防抖/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">函数的节流与防抖</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-中的-mvvm"><span class="nav-number">1.</span> <span class="nav-text">vue 中的 mvvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-的双向绑定的原理简介"><span class="nav-number">2.</span> <span class="nav-text">vue 的双向绑定的原理简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mvvm-和-mvc-的区别以及适合的场景"><span class="nav-number">3.</span> <span class="nav-text">mvvm 和 mvc 的区别以及适合的场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-的特点"><span class="nav-number">4.</span> <span class="nav-text">vue 的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-show-指令，v-if-的区别"><span class="nav-number">5.</span> <span class="nav-text">v-show 指令，v-if 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何让-css-只在当前组件中起作用"><span class="nav-number">6.</span> <span class="nav-text">如何让 css 只在当前组件中起作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-生命周期"><span class="nav-number">7.</span> <span class="nav-text">Vue 生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-路由"><span class="nav-number">8.</span> <span class="nav-text">Vue 路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件之间传值"><span class="nav-number">9.</span> <span class="nav-text">组件之间传值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vuex-的-mutation-和-action-的特性及区别"><span class="nav-number">10.</span> <span class="nav-text">vuex 的 mutation 和 action 的特性及区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用-v-for-时必须添加唯一的-key"><span class="nav-number">11.</span> <span class="nav-text">为什么使用 v-for 时必须添加唯一的 key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computed-和-watched-的区别"><span class="nav-number">12.</span> <span class="nav-text">computed 和 watched 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当-vue-的-data-里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图"><span class="nav-number">13.</span> <span class="nav-text">当 vue 的 data 里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，向对象中添加新的属性，如果更新此属性的值，是否会更新视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-和-Vue-delete-删除数组的区别"><span class="nav-number">14.</span> <span class="nav-text">delete 和 Vue.delete 删除数组的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何优化-SPA-应用的首屏加载速度慢的问题"><span class="nav-number">15.</span> <span class="nav-text">如何优化 SPA 应用的首屏加载速度慢的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令-keep-alive"><span class="nav-number">16.</span> <span class="nav-text">指令 keep-alive</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>

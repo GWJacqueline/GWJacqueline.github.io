@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>严格模式 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="js严格模式ES5">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近又重温了一下犀牛书，想对严格模式下的语言规范进行一下梳理和总结。“use strict” 是 ES5 引入的一条指令，它只能出现在脚本代码的开始或者函数体的开始、任何实体语句之前。使用”use strict”指令的目的是说明（脚本或函数中）后续的代码将会解析为严格代码。严格模式是一种特殊的执行模式，它修复了部分语言上的不">
+<meta name="keywords" content="js,严格模式,ES5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="严格模式">
+<meta property="og:url" content="https://gwjacqueline.github.io/严格模式/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近又重温了一下犀牛书，想对严格模式下的语言规范进行一下梳理和总结。“use strict” 是 ES5 引入的一条指令，它只能出现在脚本代码的开始或者函数体的开始、任何实体语句之前。使用”use strict”指令的目的是说明（脚本或函数中）后续的代码将会解析为严格代码。严格模式是一种特殊的执行模式，它修复了部分语言上的不">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-16T11:02:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="严格模式">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近又重温了一下犀牛书，想对严格模式下的语言规范进行一下梳理和总结。“use strict” 是 ES5 引入的一条指令，它只能出现在脚本代码的开始或者函数体的开始、任何实体语句之前。使用”use strict”指令的目的是说明（脚本或函数中）后续的代码将会解析为严格代码。严格模式是一种特殊的执行模式，它修复了部分语言上的不">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-严格模式" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      严格模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/严格模式/" class="article-date">
+	  <time datetime="2019-06-16T06:03:41.000Z" itemprop="datePublished">2019-06-16</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近又重温了一下犀牛书，想对严格模式下的语言规范进行一下梳理和总结。“use strict” 是 ES5 引入的一条指令，它只能出现在脚本代码的开始或者函数体的开始、任何实体语句之前。使用”use strict”指令的目的是说明（脚本或函数中）后续的代码将会解析为严格代码。严格模式是一种特殊的执行模式，它修复了部分语言上的不足，提供更强的错误检查，并增强安全性。不建议在整个脚本中使用严格模式，建议按照一个个函数去开启严格模式。避免合并脚本带来的问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    “use strict”</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;</span><br><span class="line">function A()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="不允许用with语句"><a href="#不允许用with语句" class="headerlink" title="不允许用with语句"></a>不允许用<code>with</code>语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;&#125;(</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    with(&#123;x:1&#125;)&#123;</span><br><span class="line">        console.log(x);</span><br><span class="line">    &#125;;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>报错：语法错误 SyntaxError</strong></p>
+<h3 id="不允许未声明的变量被赋值"><a href="#不允许未声明的变量被赋值" class="headerlink" title="不允许未声明的变量被赋值"></a>不允许未声明的变量被赋值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    x = 1;</span><br><span class="line">    console.log(window.x);</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：引用错误 ReferenceError(在作用域中找不到)</strong>，在非严格模式下，这种隐式声明的全局变量的方法是给全局对象新增加一个新属性，但是在严格模式下，所有的变量都要先声明。</p>
+<h3 id="调用的函数（不是方法）中this指的是-undefined"><a href="#调用的函数（不是方法）中this指的是-undefined" class="headerlink" title="调用的函数（不是方法）中this指的是 undefined"></a>调用的函数（不是方法）中<code>this</code>指的是 undefined</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br><span class="line">A() === undefined; //true</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br><span class="line">A() === window</span><br></pre></td></tr></table></figure>
+<p><strong>一般函数中<code>this</code>指的是 window，严格模式下，<code>this</code>指的是 undefined</strong></p>
+<h3 id="使用apply、call、bind时，当传入的参数为’null-或-undefined’时，this-指向‘null-或-undefined’"><a href="#使用apply、call、bind时，当传入的参数为’null-或-undefined’时，this-指向‘null-或-undefined’" class="headerlink" title="使用apply、call、bind时，当传入的参数为’null 或 undefined’时，this 指向‘null 或 undefined’"></a>使用<code>apply</code>、<code>call</code>、<code>bind</code>时，当传入的参数为’null 或 undefined’时，this 指向‘null 或 undefined’</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    function A()&#123;return this&#125;;</span><br><span class="line">    console.log(apply(null)); //null</span><br><span class="line">    console.log(call(undefined)); //undefined</span><br><span class="line">    console.log(bind(null));  //null</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    function A()&#123;return this&#125;;</span><br><span class="line">    console.log(apply(null)); //window</span><br><span class="line">    console.log(call(undefined)); //window</span><br><span class="line">    console.log(bind(null));  //window</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="不允许给只读属性赋值和不可扩展的对象创建新成员"><a href="#不允许给只读属性赋值和不可扩展的对象创建新成员" class="headerlink" title="不允许给只读属性赋值和不可扩展的对象创建新成员"></a>不允许给只读属性赋值和不可扩展的对象创建新成员</h3><p>只读属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">     var obj = &#123;</span><br><span class="line">        get x()&#123;</span><br><span class="line">            return 8;</span><br><span class="line">        &#125;;</span><br><span class="line">     &#125;;</span><br><span class="line">     obj.x = 6;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：类型错误 TypeError，在非严格模式下，只是简单的操作失败</strong></p>
+<p>不可扩展的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">     var obj = &#123; name:&apos;Lucy&apos; &#125;;</span><br><span class="line">     Object.preventExtensions(obj);</span><br><span class="line">     obj.age = 17;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：类型错误 TypeError，在非严格模式下，只是简单的操作失败</strong></p>
+<h3 id="eval-具有独立的作用域"><a href="#eval-具有独立的作用域" class="headerlink" title="eval 具有独立的作用域"></a>eval 具有独立的作用域</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;</span><br><span class="line">    eval(&apos;var age = 15;&apos;);</span><br><span class="line">    console.log(typeof age); //undefined</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    eval(&apos;var age = 15;&apos;);</span><br><span class="line">    console.log(typeof age); //number</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="arguments-变为静态的参数副本"><a href="#arguments-变为静态的参数副本" class="headerlink" title="arguments 变为静态的参数副本"></a>arguments 变为静态的参数副本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!function(x)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    arguments[0] = 10;</span><br><span class="line">    console.log(x);  //1</span><br><span class="line">&#125;(1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function(x)&#123;</span><br><span class="line">    arguments[0] = 10;</span><br><span class="line">    console.log(x); //10</span><br><span class="line">&#125;(1)</span><br></pre></td></tr></table></figure>
+<p><strong>严格模式下，argument 不可被修改，但是我们可以通过传对象的方式修改</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!function(a)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    arguments[0].x =10;</span><br><span class="line">    console.log(a.x); //10</span><br><span class="line">&#125;(&#123;x:1&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="不能删除非法的标识符（比如变量、函数、函数参数）"><a href="#不能删除非法的标识符（比如变量、函数、函数参数）" class="headerlink" title="不能删除非法的标识符（比如变量、函数、函数参数）"></a>不能删除非法的标识符（比如变量、函数、函数参数）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function(a)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    delete a;</span><br><span class="line">&#125;(1)</span><br></pre></td></tr></table></figure>
+<p><strong>报错：语法错误 SyntaxError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!function(a)&#123;</span><br><span class="line">    console.log(delete a);  //false</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>在非严格模式下，返回 false,无意义但不会报错</strong></p>
+<h3 id="不能删除不可配置的属性"><a href="#不能删除不可配置的属性" class="headerlink" title="不能删除不可配置的属性"></a>不能删除不可配置的属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">!function(a)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    var obj = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(obj,&apos;a&apos;,&#123;</span><br><span class="line">        configurable:false</span><br><span class="line">    &#125;);</span><br><span class="line">    delete obj.a;</span><br><span class="line">&#125;(1)</span><br></pre></td></tr></table></figure>
+<p><strong>报错：类型错误 TypeError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">!function(a)&#123;</span><br><span class="line">    var obj = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(obj,&apos;a&apos;,&#123;</span><br><span class="line">        configurable:false</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(delete obj.a);  //false</span><br><span class="line">&#125;(1)</span><br></pre></td></tr></table></figure>
+<p><strong>在非严格模式下，delete 表达式操作失败，并返回 false</strong></p>
+<h3 id="对象字面量重复属性报错"><a href="#对象字面量重复属性报错" class="headerlink" title="对象字面量重复属性报错"></a>对象字面量重复属性报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    var obj=&#123;x:1,x:2&#125;;</span><br><span class="line">    console.log(obj.x);</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：严格模式下报语法错误 SyntaxError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    var obj=&#123;x:1,x:2&#125;;</span><br><span class="line">    console.log(obj.x);   //2</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>非严格模式下最后一个重名对象将覆盖之前的</strong></p>
+<h3 id="函数参数名重复报错"><a href="#函数参数名重复报错" class="headerlink" title="函数参数名重复报错"></a>函数参数名重复报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function(x,x,y)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    console.log(x+y);</span><br><span class="line">&#125;(1,2,3)</span><br></pre></td></tr></table></figure>
+<p><strong>报错：严格模式下报语法错误 SyntaxError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function(x,x,y)&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    console.log(x+y); //5</span><br><span class="line">&#125;(1,2,3)</span><br></pre></td></tr></table></figure>
+<p><strong>非严格模式下，最后一个重名参数会覆盖之前的重名参数</strong></p>
+<h3 id="禁止八进制字面量"><a href="#禁止八进制字面量" class="headerlink" title="禁止八进制字面量"></a>禁止八进制字面量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    console.log(0123);</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：严格模式下报语法错误 SyntaxError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    console.log(0123);  //83</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="eval、arguments-变为关键字，不能作为变量、函数名"><a href="#eval、arguments-变为关键字，不能作为变量、函数名" class="headerlink" title="eval、arguments 变为关键字，不能作为变量、函数名"></a>eval、arguments 变为关键字，不能作为变量、函数名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    &quot;use strict&quot;;</span><br><span class="line">    function eval()&#123;&#125;;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<p><strong>报错：严格模式下报语法错误 SyntaxError</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!function()&#123;</span><br><span class="line">    function eval()&#123;&#125;;</span><br><span class="line">    console.log(eval);  //function eval()&#123;&#125;</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="禁用arguments-caller、arguments-callee"><a href="#禁用arguments-caller、arguments-callee" class="headerlink" title="禁用arguments.caller、arguments.callee"></a>禁用<code>arguments.caller</code>、<code>arguments.callee</code></h3>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/严格模式/" target="_blank" title="严格模式">https://gwjacqueline.github.io/严格模式/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES5/">ES5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/严格模式/">严格模式</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/kano模型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">kano模型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#不允许用with语句"><span class="nav-number">1.</span> <span class="nav-text">不允许用with语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不允许未声明的变量被赋值"><span class="nav-number">2.</span> <span class="nav-text">不允许未声明的变量被赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用的函数（不是方法）中this指的是-undefined"><span class="nav-number">3.</span> <span class="nav-text">调用的函数（不是方法）中this指的是 undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用apply、call、bind时，当传入的参数为’null-或-undefined’时，this-指向‘null-或-undefined’"><span class="nav-number">4.</span> <span class="nav-text">使用apply、call、bind时，当传入的参数为’null 或 undefined’时，this 指向‘null 或 undefined’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不允许给只读属性赋值和不可扩展的对象创建新成员"><span class="nav-number">5.</span> <span class="nav-text">不允许给只读属性赋值和不可扩展的对象创建新成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eval-具有独立的作用域"><span class="nav-number">6.</span> <span class="nav-text">eval 具有独立的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments-变为静态的参数副本"><span class="nav-number">7.</span> <span class="nav-text">arguments 变为静态的参数副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能删除非法的标识符（比如变量、函数、函数参数）"><span class="nav-number">8.</span> <span class="nav-text">不能删除非法的标识符（比如变量、函数、函数参数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能删除不可配置的属性"><span class="nav-number">9.</span> <span class="nav-text">不能删除不可配置的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象字面量重复属性报错"><span class="nav-number">10.</span> <span class="nav-text">对象字面量重复属性报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数名重复报错"><span class="nav-number">11.</span> <span class="nav-text">函数参数名重复报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止八进制字面量"><span class="nav-number">12.</span> <span class="nav-text">禁止八进制字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eval、arguments-变为关键字，不能作为变量、函数名"><span class="nav-number">13.</span> <span class="nav-text">eval、arguments 变为关键字，不能作为变量、函数名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用arguments-caller、arguments-callee"><span class="nav-number">14.</span> <span class="nav-text">禁用arguments.caller、arguments.callee</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
