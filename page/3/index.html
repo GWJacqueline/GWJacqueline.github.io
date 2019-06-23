@@ -175,6 +175,181 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-JS异步编程的那些事(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/JS异步编程的那些事(一)/">JS异步编程的那些事(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/JS异步编程的那些事(一)/" class="article-date">
+	  <time datetime="2019-04-18T13:31:33.000Z" itemprop="datePublished">2019-04-18</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          <!--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从最早的回调函数，之后迎来了 promise,再次就是上篇文章说的 generator，js 解决异步的方案一次次的再优化，ES7 中出现的 Async/await 是目前 js 中异步最终极的解决方案，我的妈耶不谈兼容...-->
+            <!--更多后不显示-->
+            <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从最早的回调函数，之后迎来了 promise,再次就是上篇文章说的 <a href="https://gwjacqueline.github.io/generator%E7%94%9F%E6%88%90%E5%99%A8/">generator</a>，js 解决异步的方案一次次的再优化，ES7 中出现的 Async/await 是目前 js 中异步最终极的解决方案，我的妈耶不谈兼容问题的话，实在是太好用啦。虽然兼容性真的很一般，但是我们可以用 polyfill(js 修补器)去兼容一下呀。接下来我将简单介绍下 Promise、fetch、 Async/await 以及分别用 fetch 和 Async/await 去封装一个增删改查的方法。来看看编写异步代码的过程是如何一步步变得优雅起来的。</p>
+</blockquote>
+        </p>
+        <p class="article-more-link">
+          <a href="/JS异步编程的那些事(一)/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-generator生成器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/generator生成器/">generator生成器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/generator生成器/" class="article-date">
+	  <time datetime="2019-04-13T11:31:01.000Z" itemprop="datePublished">2019-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          <!--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历...-->
+            <!--更多后不显示-->
+            <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generator 生成器是 ES6 提供主要用来解决异步编程深度嵌套的问题。generator 和其他函数不同的是：一般的函数只有一次返回值，generator 可以返回多次值。我们可以把它理解为一个函数内部状态的遍历器，我们每执行一次，函数的内部的状态就会发生一次改变。</p>
+</blockquote>
+        </p>
+        <p class="article-more-link">
+          <a href="/generator生成器/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
+    <article id="post-js如何禁用物理返回键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/js如何禁用物理返回键/">js如何禁用物理返回键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/js如何禁用物理返回键/" class="article-date">
+	  <time datetime="2019-04-13T01:36:36.000Z" itemprop="datePublished">2019-04-13</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/js/">js</a>
+
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          <!--
+&nbsp;&nbsp;&nbsp;&nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~
+
+
+效果展示我的 demo,是不是已经成功禁用了呢？
+核心方法history.pushState(state, title...-->
+            <!--更多后不显示-->
+            <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;最近做的几个项目都有涉及如何禁用 android 和 ios 的物理返回键，今天有空就把怎么禁用以及禁用原理记录一下吧~</p>
+</blockquote>
+        </p>
+        <p class="article-more-link">
+          <a href="/js如何禁用物理返回键/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+
+  
     <article id="post-手机端调用搜索键盘" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="article-inner">
     
