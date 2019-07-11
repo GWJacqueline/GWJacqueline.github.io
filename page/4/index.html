@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>category: js | guowj</title>
+  <title>guowj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
@@ -12,7 +12,7 @@
   <meta name="description" content="个人技术博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="guowj">
-<meta property="og:url" content="https://gwjacqueline.github.io/categories/js/page/2/index.html">
+<meta property="og:url" content="https://gwjacqueline.github.io/page/4/index.html">
 <meta property="og:site_name" content="guowj">
 <meta property="og:description" content="个人技术博客">
 <meta property="og:locale" content="zh-CN">
@@ -49,17 +49,15 @@
   <link rel="stylesheet" href="/css/bootstrap.css">
 
   
-    <link rel="stylesheet" href="/css/dialog.css">
+    <link rel="stylesheet" href="/css/home.css">
+  
+
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
   
 
   
 
-  
-    <link rel="stylesheet" href="/css/header-post.css">
-  
-
-  
-    <link rel="stylesheet" href="/css/archive.css">
   
   
   
@@ -74,200 +72,181 @@
 
 
   
-  <div id="container">
-    <div id="wrap">
+    <header id="header">
+
+	<!-- 背景图模式 -->
+	
+
+    
+      <div id="intrologo" class="intro-logo">
+    
+ 
+
+
+    <canvas width="100%" height="100%"></canvas>
+    <script>
+      var c = document.getElementsByTagName('canvas')[0],
+          x = c.getContext('2d'),
+          w = window.innerWidth,
+          h = window.innerHeight,
+          pr = window.devicePixelRatio || 1,
+          f = 90,
+          q,
+          m = Math,
+          r = 0,
+          u = m.PI*2,
+          v = m.cos,
+          z = m.random
+      c.width = w*pr
+      c.height = h*pr
+      x.scale(pr, pr)
+      x.globalAlpha = 0.6
+
+      <!-- 折线Polyline背景 -->
       
-        <header>
+		 function redraw(){
+		 	var pattern = Trianglify({
+				width: window.innerWidth,
+				height: window.innerHeight
+			});
+            pattern.canvas(c)
+        }
+        document.getElementById("intrologo").onclick = redraw
+        document.getElementById("intrologo").ontouchstart = redraw
+		redraw()
+      
+    </script>
+    
 
-    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="navbar-inner">
-          
-          <div class="container"> 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    
+      <div id="homelogo" class="homelogo" style="background: rgba(255,255,255,1);"> 
+    
 
-            
-              <a class="brand" style="
-                 margin-top: 0px;">
-                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
-              </a>
-            
-            
-            <div class="navbar-collapse collapse">
-              <ul class="hnav navbar-nav">
-                
-                  <li> <a class="main-nav-link" href="/">首页</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
-                
-                  <li><div id="search-form-wrap">
-
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder>
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div></li>
-            </ul></div>
+        
+          <div class="homelogoback" style="border: 1px solid #404040;">
+            <h1><a href="#content" id="logo">guowj</a></h1>
+            <h3>个人技术博客</h3>
+            <!--<h5>guowj</h5>-->
+            <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
           </div>
-                
-      </div>
+        
+    
     </div>
+  </div>
+
+  <!-- 自适应主页背景大图 -->
+  
+
+ <!-- home_logo_image居中 -->
+ 
+    <script>
+        var homelogodiv = document.getElementById("homelogo");
+        if (document.all.homelogo.offsetWidth > document.body.clientWidth) {
+          homelogodiv.style.width = document.body.clientWidth + "px";
+          homelogodiv.style.marginLeft = document.body.clientWidth * -0.5 + "px";
+        } else {
+          homelogodiv.style.width = homelogodiv.clientWidth  + "px";
+          homelogodiv.style.marginLeft = (homelogodiv.clientWidth)  * -0.5 + "px";
+        }
+    </script>
+  
+
+  <div class="intro-navigate">
+      <p class="navigater-list">
+        
+          <a id="beautifont" class="main-nav-link" href="/">首页</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/archives">归档</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/categories">分类</a>
+        
+          <a id="beautifont" class="main-nav-link" href="/tags">标签</a>
+        
+      </p>
+  </div>
 
 </header>
-
-
-
+  
+  <div id="container">
+    <div id="wrap">
       
             
       <div id="content" class="outer">
         
           <section id="main" style="float:none;">
   
-  
-  
+    <article id="post-http请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
     
     
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <h1><a href="/archives/2019" class="archive-year">2019</a></h1>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-	<a href="/天花乱坠的数组方法(二)/" class="archive-article-date">
-	  <time datetime="2019-04-07T11:35:39.000Z" itemprop="datePublished">2019-04-07</time>
-	</a>
-
-      
+      <header class="article-header">
+        
   
     <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/天花乱坠的数组方法(二)/">天花乱坠的数组方法(二)</a>
+      <a class="article-title" href="/http请求/">http请求</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
+    <div class="article-meta">
       
-	<a href="/天花乱坠的数组方法(一)/" class="archive-article-date">
-	  <time datetime="2019-04-06T09:52:39.000Z" itemprop="datePublished">2019-04-06</time>
-	</a>
-
-      
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/天花乱坠的数组方法(一)/">天花乱坠的数组方法(一)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-	<a href="/重温OOP之原型链与继承/" class="archive-article-date">
-	  <time datetime="2019-03-31T11:31:34.000Z" itemprop="datePublished">2019-03-31</time>
-	</a>
-
-      
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/重温OOP之原型链与继承/">重温OOP之原型与继承</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-	<a href="/http请求/" class="archive-article-date">
+	<a href="/http请求/" class="article-date">
 	  <time datetime="2019-03-30T09:24:53.000Z" itemprop="datePublished">2019-03-30</time>
 	</a>
 
       
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/http请求/">http请求</a>
-    </h1>
-  
+    <a class="article-category-link" href="/categories/js/">js</a>
 
-    </header>
+      
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p class="article-excerpt-content">
+          <!--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章将从记录下 http 请求相关的一些内容。
+
+
+HTTP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http 是计算机通过网络进行通信的规则。http 是一种无状态的连接，也就是说 h...-->
+            <!--更多后不显示-->
+            <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章将从记录下 http 请求相关的一些内容。</p>
+</blockquote>
+        </p>
+        <p class="article-more-link">
+          <a href="/http请求/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+
+    </footer>
   </div>
+  
 </article>
-  
-  
-    </div></section>
+
+<!-- Table of Contents -->
+
+
   
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/categories/js/">&laquo; 上一页</a><a class="page-number" href="/categories/js/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 </section>
         
       </div>
+      
+        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
       
       <footer id="footer">
   
@@ -356,6 +335,8 @@
 
 <script src="/js/scripts.js"></script>
 
+
+  <script src="/js/home.js"></script>
 
 
 
