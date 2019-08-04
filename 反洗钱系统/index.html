@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>反洗钱系统 | guowj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="产品反洗钱系统">
+  
+  
+  
+  
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现阶段，根据监管要求，银行投入了大量的人力物力在建立反洗钱系统。反洗钱系统即通过技术手段来达到反洗钱目的的应用系统。本篇文章从反洗钱系统的两个核心部分、以及运作的大致流程、常见的功能模块来梳理下反洗钱系统。">
+<meta name="keywords" content="产品,反洗钱系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反洗钱系统">
+<meta property="og:url" content="https://gwjacqueline.github.io/反洗钱系统/index.html">
+<meta property="og:site_name" content="guowj">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现阶段，根据监管要求，银行投入了大量的人力物力在建立反洗钱系统。反洗钱系统即通过技术手段来达到反洗钱目的的应用系统。本篇文章从反洗钱系统的两个核心部分、以及运作的大致流程、常见的功能模块来梳理下反洗钱系统。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-02T12:31:44.915Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反洗钱系统">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;现阶段，根据监管要求，银行投入了大量的人力物力在建立反洗钱系统。反洗钱系统即通过技术手段来达到反洗钱目的的应用系统。本篇文章从反洗钱系统的两个核心部分、以及运作的大致流程、常见的功能模块来梳理下反洗钱系统。">
+  
+    <link rel="alternate" href="/atom.xml" title="guowj" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.png">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.png">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt; src:url("../css/fonts/FuturaPTBold.otf") format("woff");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt-light; src:url("../css/fonts/FuturaPTBook.otf") format("woff");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt-italic; src:url("../css/fonts/FuturaPTBookOblique.otf") format("woff");font-weight:400;font-style:italic;}
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css">
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+</head>
+</html>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;" href="#" data-toggle="modal" data-target="#myModal">
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.png">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder>
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </ul></div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-反洗钱系统" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      反洗钱系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/反洗钱系统/" class="article-date">
+	  <time datetime="2019-08-03T06:30:03.000Z" itemprop="datePublished">2019-08-03</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/产品/">产品</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+      
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现阶段，根据监管要求，银行投入了大量的人力物力在建立反洗钱系统。<strong>反洗钱系统即通过技术手段来达到反洗钱目的的应用系统。</strong>本篇文章从反洗钱系统的<strong>两个核心部分、以及运作的大致流程、常见的功能模块</strong>来梳理下反洗钱系统。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="核心组成"><a href="#核心组成" class="headerlink" title="核心组成"></a>核心组成</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反洗钱系统主要由两个部分组成。一个是<strong>大额可疑机制</strong>（现在更多场景是高频可疑），另一个则是<strong>黑名单机制</strong>。反洗钱系统简单来说就是设定一些会触发预警的条件(具体条件可参见各类反洗钱规章制度)，较为常见的是金额大，笔数多。</p>
+<h3 id="大额可疑机制"><a href="#大额可疑机制" class="headerlink" title="大额可疑机制"></a>大额可疑机制</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按业务来分有两种：对公业务和对私业务。无论是对公业务还是对私业务，只要涉及到动户，反洗钱系统就会根据交易情况生成对应报表。可以从某个账户的交易中看出某一段时间内资金进出及额度情况。反洗钱系统中设置了与其相对应的预警机制，一旦触发，就由人工（开户行或者交易经办行）进行识别，由他们进行判断是否真正是大额可疑。一旦确认，则报送给人行；反之，就取消预警。总而言之就是反洗钱系统根据交易规则筛选出交易，然后由人工进行二次判断。人行定期会对报送质量差的银行进行通报。这个报送质量基本上取决于人工识别的质量，至于怎么人工识别，一般性是看看流水和交易对手账户。如果是开户行有客户经理的话会核实一下客户情况。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中大额规定为：<strong>单位账户间对公户发生转账交易单日累计额超过人民币 500 万或超过等价于 20 万美元的外币交易、个人账户存款账户间单转账交易单日累计额超过人民币 50 万或超过等价于 10 万美元的外币交易、个人账户单日提现累计超过 20 万人民币或超过等价于 1 万美元的外币（但是目前中行要求个人每日外汇提取现钞不得超过等价 10000 美元，所以外汇单日提钞一般不会进入反洗名单，多日连续操作除外。）</strong>可疑：达到上述条件后，你就算在反洗中心报名了，接着就是通过你开户时预留的职业月收入信息来进行人工分析并识别可疑，如果不幸列入可疑名单，反洗中心会对你的交易行发送协助查询文件至你的开户行，需要开户行对你这笔可疑交易进行解释说明，然后开户行再给反洗监测中心一个说法。简言之就是这么个过程。</p>
+<p>反洗钱系统实现反洗钱规则的过程可以简化成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 帐号，客户号，客户名称，对手帐号等</span><br><span class="line"><span class="keyword">FROM</span> 各系统交易流水表</span><br><span class="line"><span class="keyword">WHERE</span> 日期=今天 <span class="keyword">AND</span> 金额&gt;=限定额度 <span class="keyword">AND</span> 币种=本外币 <span class="keyword">AND</span> 帐号（<span class="number">101</span>是个人活期，<span class="number">201</span>是单位活期） <span class="keyword">AND</span> 现转标志 = 转账或现金 <span class="keyword">AND</span> 借贷标志 = 转出或者转入、存入或取出</span><br><span class="line">&lt;!<span class="comment">--单日累计的话还要加个GROUP BY 日期，客户号或者帐号 HAVING SUM(金额) &gt;= 限额 --&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="黑名单机制"><a href="#黑名单机制" class="headerlink" title="黑名单机制"></a>黑名单机制</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所谓黑名单，是指在交易过程中，首先会向反洗钱系统发一个查询，检查这个帐户的持有人是否存在在黑名单中，如果存在在黑名单中，反洗钱系统即时给正在交易的系统进行反馈，并提醒冻结帐户。这个反洗黑名单是是一个动态变化的过程，如果你第一次不幸进入名单，但之后经常发生类似的交易，系统也会自动采集，如果交易反馈的状态是合情合理合法的话，不久这种交易也会被系统默认为正常交易，从而将你的名字从反洗黑名单中撤出。</p>
+<h2 id="运作的大致流程"><a href="#运作的大致流程" class="headerlink" title="运作的大致流程"></a>运作的大致流程</h2><h3 id="了解客户"><a href="#了解客户" class="headerlink" title="了解客户"></a>了解客户</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即对客户身份的识别。对所有客户建立一个关于基本信息，交易信息，风险等级的档案而且得进行日常维护和调整。目的在于了解客户（个人或者公司）使用账户的目的，可能产生交易的大小，资金的来源，对于公司要了解更多，谁可以执行交易，谁是公司的最终利益所有人，谁给对公司的抉择有话语权，公司的交易方是谁。同时也要了解上述提到的不同的人和第三方的所在地址，注册地址，以防触碰到制裁国家。因为客户状态会随着时间转变，银行也会定期更新客户的资料。</p>
+<h3 id="交易审查与交易监管"><a href="#交易审查与交易监管" class="headerlink" title="交易审查与交易监管"></a>交易审查与交易监管</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交易审查像一个筛子，能过滤所有交易得到符合可疑大规则的交易形成案例，然后从网点到支行总行层层筛选，到最后分析得出结论把存在可疑的案例上报人行。人行再筛选给公安机关。目的是根据了解客户得到的信息和客户进行的交易行为做对比。交易审查发生在提交交易和批准交易之间，关注点在于 交易方的所在地 ，交易额度，以及交易方式（现金，汇款，支票等）。这个审查就是用电脑系统来完成第一步侦测以及审批，如果有可疑，就会有人工的介入，这时就会再做一次交易行为的了解客户，最终做决定是否批准交易或者提交可疑报告给监管机构。交易监管发生在交易后，也是有电脑和人工不同层级的监察。交易监管的次数按照客户的洗钱风险高低来决定，高风险可能需要每年审查全年交易。</p>
+<h3 id="风险评级"><a href="#风险评级" class="headerlink" title="风险评级"></a>风险评级</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有一个评分的规则会给每一个客户打分评级，开户后系统自动评级，后期会根据可疑案例，身份信息，公安调查，实际案件，交易情况，风险事件等等随时人工调整风险等级，对两极化的客户有黑白名单的维护。如果你真拿一个亿去存，铁定触发规则被抓取交易，然后结合客户身份信息形成案例，当然，网点工作人员会对你的信息汇总分析啊，得出结论可疑就往上报有确信依据没有风险就排除该案例，如果你天天拿一个亿去存，网点当然开心了绩效奖金都来了嘛，但是还是会天天触发规则形成案例，再重复识别分析案例的工作。</p>
+<h3 id="提交递交报告"><a href="#提交递交报告" class="headerlink" title="提交递交报告"></a>提交递交报告</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最终递交可疑报告，是上报给监管机构。因为银行不是监管机构，没有处罚的权利，只有上报的义务。</p>
+<h2 id="常用的功能模块"><a href="#常用的功能模块" class="headerlink" title="常用的功能模块"></a>常用的功能模块</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比较完整的系统会包含如下几个功能模块，重要性从高到低顺序往下：1，大额高频可疑交易的监控报表和黑名单报表；2，与核心业务系统相关的交互接口，控制告警，冻结，解冻，报送等操作；3，高风险交易人群的人群画像和反洗钱模型评级；4，作业岗的人工作业平台。国内做的较好的是北京银丰新融科技开发有限公司的发洗钱系统，可以参考下。</p>
+<p>感谢以下文章对我的帮助：</p>
+<p><a href="https://www.jianshu.com/p/ba3b0e947f7e" target="_blank" rel="noopener">https://www.jianshu.com/p/ba3b0e947f7e</a></p>
+<p><a href="https://www.zhihu.com/question/21285905" target="_blank" rel="noopener">https://www.zhihu.com/question/21285905</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '../images/wx.jpeg',
+  alipayImage: '../images/zfb.jpg'
+});
+</script>
+      
+      
+      <div>
+        <ul class="post-copyright">
+          <li class="post-copyright-author">
+          <strong>本文作者:  </strong>guowj
+          </li>
+          <li class="post-copyright-link">
+          <strong>本文链接:  </strong>
+          <a href="/反洗钱系统/" target="_blank" title="反洗钱系统">https://gwjacqueline.github.io/反洗钱系统/</a>
+          </li>
+          <li class="post-copyright-license">
+            <strong>版权声明:   </strong>
+            本博客所有文章除特别声明外，均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+            许可协议。转载请注明出处
+          </li>
+         
+        </ul>
+<div>
+</div></div>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80MzU1OS8yMDA5OA==" ">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/产品/">产品</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/反洗钱系统/">反洗钱系统</a></li></ul>
+
+      
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/第三方移动支付之远程支付/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          第三方移动支付之远程支付
+        
+      </div>
+    </a>
+  
+  
+    <a href="/互联网金融支付之第三方支付/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">互联网金融支付之第三方支付</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心组成"><span class="nav-number">1.</span> <span class="nav-text">核心组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大额可疑机制"><span class="nav-number">1.1.</span> <span class="nav-text">大额可疑机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#黑名单机制"><span class="nav-number">1.2.</span> <span class="nav-text">黑名单机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运作的大致流程"><span class="nav-number">2.</span> <span class="nav-text">运作的大致流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#了解客户"><span class="nav-number">2.1.</span> <span class="nav-text">了解客户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易审查与交易监管"><span class="nav-number">2.2.</span> <span class="nav-text">交易审查与交易监管</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评级"><span class="nav-number">2.3.</span> <span class="nav-text">风险评级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交递交报告"><span class="nav-number">2.4.</span> <span class="nav-text">提交递交报告</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的功能模块"><span class="nav-number">3.</span> <span class="nav-text">常用的功能模块</span></a></li></ol>
+    
+    </div>
+  </aside>
+
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <!--<p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>-->
+	      <p id="copyRightEn">Copyright &copy;2019 guowj All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            guowj
+          </div>
+          <div class="panel-body">
+            Copyright © 2019 guowj All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
